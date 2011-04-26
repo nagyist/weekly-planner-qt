@@ -24,7 +24,7 @@ Item {
     }
 
     // Pivot headers
-    Flickable {
+    ListView {
         id: headerRow
         property int pivotHeaderWidth: 200
         anchors {
@@ -33,14 +33,10 @@ Item {
             top: parent.top
         }
         height: 100
-        contentWidth: pivotPages.count * pivotHeaderWidth;
-        Row {
-            anchors.fill:  parent
-            Repeater {
-                model: pivotPages
-                delegate: pivotHeaderDelegate
-            }
-        }
+        model: pivotPages
+        delegate: pivotHeaderDelegate
+        orientation: ListView.Horizontal
+        onCurrentIndexChanged: console.log("change")
     }
 
     Component {
@@ -57,14 +53,15 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    console.log("clicked " + title)
+                    console.log("clicked " + title + " at " + index)
+                    headerRow.currentIndex = index;
                 }
             }
         }
     }
 
-    // Content pane
-    Item {
+     // Content pane
+    Table {
         id: contentPane
         anchors {
             top: headerRow.bottom
