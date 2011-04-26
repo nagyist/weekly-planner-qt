@@ -38,19 +38,26 @@ Item {
             anchors.fill:  parent
             Repeater {
                 model: pivotPages
-                Rectangle {
-                    height: parent.height
-                    width: headerRow.pivotHeaderWidth
-                    color: "steelblue"
-                    radius: 10
-                    Text {
-                        anchors.centerIn: parent
-                        text: title
-                    }
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: console.log("clicked " + title)
-                    }
+                delegate: pivotHeaderDelegate
+            }
+        }
+    }
+
+    Component {
+        id: pivotHeaderDelegate
+        Rectangle {
+            height: parent.height
+            width: headerRow.pivotHeaderWidth
+            color: "steelblue"
+            radius: 10
+            Text {
+                anchors.centerIn: parent
+                text: title
+            }
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    console.log("clicked " + title)
                 }
             }
         }
