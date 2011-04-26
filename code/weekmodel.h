@@ -1,18 +1,19 @@
 #ifndef WEEKMODEL_H
 #define WEEKMODEL_H
 
-#include <QObject>
+#include <QtCore/QAbstractListModel>
 
-class WeekModel : public QObject
+class WeekDay;
+
+class WeekModel : public QAbstractListModel
 {
     Q_OBJECT
 public:
     explicit WeekModel(QObject *parent = 0);
     virtual ~WeekModel();
-signals:
 
-public slots:
-
+     int rowCount(const QModelIndex &parent = QModelIndex()) const;
+     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 };
 
 #endif // WEEKMODEL_H

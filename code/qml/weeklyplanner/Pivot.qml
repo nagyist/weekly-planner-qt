@@ -4,25 +4,6 @@ Item {
     width: 360
     height: 640
 
-    ListModel {
-        id: pivotPages
-        ListElement {
-            title: "Pivot 1"
-        }
-        ListElement {
-            title: "Pivot 2"
-        }
-        ListElement {
-            title: "Pivot 3"
-        }
-        ListElement {
-            title: "Pivot 4"
-        }
-        ListElement {
-            title: "Pivot 5"
-        }
-    }
-
     // Pivot headers
     ListView {
         id: headerRow
@@ -33,7 +14,7 @@ Item {
             top: parent.top
         }
         height: 100
-        model: pivotPages
+        model: WeekModel { id: weekModel }
         delegate: pivotHeaderDelegate
         orientation: ListView.Horizontal
         onCurrentIndexChanged: console.log("change")
@@ -63,6 +44,7 @@ Item {
      // Content pane
     Table {
         id: contentPane
+        clip: true
         anchors {
             top: headerRow.bottom
             left: parent.left

@@ -1,9 +1,32 @@
 import QtQuick 1.0
 
-Rectangle {
+Item {
     id: container
     width: 360
     height: 640
 
-    color: "green"
+    property variant model: null
+
+
+    ListView {
+        anchors.fill:  parent
+        anchors.margins: 10
+
+        model: container.model
+        delegate: cellDelegate
+    }
+
+    Component {
+        id: cellDelegate
+        Rectangle {
+            width: parent.width
+            height: 100
+            radius: 10
+            color: "green"
+            Text {
+                anchors.centerIn: parent
+                text: index
+            }
+        }
+    }
 }
