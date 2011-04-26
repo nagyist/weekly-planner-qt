@@ -7,14 +7,8 @@ Rectangle {
     height: 640
     color: "lightsteelblue"
 
-    Text {
-        text: "Hello World"
-        anchors.centerIn: parent
-    }
-    MouseArea {
+    Pivot {
+        id: mainPivot
         anchors.fill: parent
-        onClicked: {
-            Qt.quit();
-        }
     }
 }
