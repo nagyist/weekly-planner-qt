@@ -45,6 +45,7 @@ Item {
     Table {
         id: contentPane
         clip: true
+        model: testday
         anchors {
             top: headerRow.bottom
             left: parent.left

@@ -3,8 +3,6 @@
 
 #include <QtCore/QAbstractListModel>
 
-class WeekDay;
-
 class WeekModel : public QAbstractListModel
 {
     Q_OBJECT

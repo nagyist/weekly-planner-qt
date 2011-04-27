@@ -1,5 +1,5 @@
 #include "weekmodel.h"
-#include "weekday.h"
+#include "daymodel.h"
 
 WeekModel::WeekModel(QObject *parent) :
     QAbstractListModel(parent)
