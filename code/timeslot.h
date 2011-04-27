@@ -13,8 +13,8 @@ signals:
       void dataChanged();
 public:
     enum Roles {
-        NameRole = Qt::UserRole+1,
-        StartTimeRole
+        StartTimeRole = Qt::UserRole+1,
+        ItemDataRole
       };
 
     static QHash<int, QByteArray> roleNames();

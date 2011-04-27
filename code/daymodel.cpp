@@ -8,6 +8,7 @@ DayModel::DayModel(const QString& day, QObject *parent) :
 {
     for (int i = 0; i < SLOTS_IN_A_DAY; i++) {
         Timeslot *slot = new Timeslot(QTime(i, 0, 0, 0));
+        slot->setData("Testdata");
         m_slots[i] = slot;
     }
     setRoleNames(Timeslot::roleNames());

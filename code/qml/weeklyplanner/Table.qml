@@ -17,9 +17,12 @@ Item {
 
     Component {
         id: cellDelegate
+        Row {
+            width: parent.width
+            height: 50
         Rectangle {
             id: timeRect
-            width: parent.width
+            width: parent.width / 4
             height: 50
             radius: 10
             color: "green"
@@ -27,6 +30,18 @@ Item {
                 anchors.centerIn: parent
                 text: startTime
             }
+        }
+        Rectangle {
+            id: dataRect
+            width: parent.width / 4*3
+            height: 50
+            radius: 10
+            color: "steelblue"
+            Text {
+                anchors.centerIn: parent
+                text: itemData
+            }
+        }
         }
     }
 }

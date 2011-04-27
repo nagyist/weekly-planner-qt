@@ -14,7 +14,7 @@ QHash<int, QByteArray> Timeslot::roleNames()
 {
     QHash<int, QByteArray> roles;
     roles[StartTimeRole] = "startTime";
-    roles[NameRole] = "name";
+    roles[ItemDataRole] = "itemData";
     return roles;
 }
 
@@ -29,7 +29,7 @@ QVariant Timeslot::data(int role) const
     switch (role) {
     case StartTimeRole:
         return QVariant(m_start.toString());
-    case NameRole:
+    case ItemDataRole:
         return QVariant(m_data);
     default:
         return QVariant();
