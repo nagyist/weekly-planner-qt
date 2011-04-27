@@ -2,15 +2,17 @@
 #define DAYMODEL_H
 
 #include <QtCore/QAbstractListModel>
-#include <QtCore/QList>
+#include <QtCore/QVector>
 
 #include "timeslot.h"
+
+static const int SLOTS_IN_A_DAY = 24;
 
 class DayModel : public QAbstractListModel
 {
     Q_OBJECT
 public:
-    DayModel(QObject *parent = 0);
+    DayModel(const QString& day, QObject *parent = 0);
     virtual ~DayModel();
 public: // From QAbstractListModel
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
@@ -26,7 +28,8 @@ signals:
 public slots:
 
 private:
-    QList<Timeslot*> m_slots;
+    QString m_dayName;
+    QVector<Timeslot*> m_slots;
 };
 
 #endif // DAYMODEL_H

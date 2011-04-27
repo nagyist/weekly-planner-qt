@@ -7,7 +7,6 @@ Item {
 
     property variant model: null
 
-
     ListView {
         anchors.fill:  parent
         anchors.margins: 10
@@ -19,13 +18,14 @@ Item {
     Component {
         id: cellDelegate
         Rectangle {
+            id: timeRect
             width: parent.width
-            height: 100
+            height: 50
             radius: 10
             color: "green"
             Text {
                 anchors.centerIn: parent
-                text: index
+                text: startTime
             }
         }
     }
