@@ -6,13 +6,14 @@
 DayModel::DayModel(const QString& day, QObject *parent) :
     QAbstractListModel(parent), m_dayName(day), m_slots(SLOTS_IN_A_DAY)
 {
-    for (int i = 0; i < SLOTS_IN_A_DAY; i++) {
+    for (int i = 0; i < SLOTS_IN_A_DAY;) {
         Timeslot *slot = new Timeslot(QTime(i, 0, 0, 0));
         slot->setData("Testdata");
-        m_slots[i] = slot;
+        m_slots[i++] = slot;
     }
     setRoleNames(Timeslot::roleNames());
-    qDebug() << "Slotcount: " << m_slots.count();
+    m_slots[9]->setSpan(2);
+    m_slots.remove(10);
 }
 
 DayModel::~DayModel()

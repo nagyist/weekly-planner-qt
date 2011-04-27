@@ -14,7 +14,8 @@ signals:
 public:
     enum Roles {
         StartTimeRole = Qt::UserRole+1,
-        ItemDataRole
+        ItemDataRole,
+        ItemSpanRole
       };
 
     static QHash<int, QByteArray> roleNames();
@@ -23,6 +24,7 @@ public:
     virtual ~Timeslot();
 
     void setData(const QString& data);
+    void setSpan(int hours);
     QVariant data(int role) const;
 signals:
 
@@ -30,6 +32,7 @@ public slots:
 
 private:
     QTime m_start;
+    int m_hours;
     QString m_data;
 
 };
