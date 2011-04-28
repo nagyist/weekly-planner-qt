@@ -2,6 +2,12 @@
 #define WEEKMODEL_H
 
 #include <QtCore/QAbstractListModel>
+#include <QtCore/QVector>
+
+#include "daymodel.h"
+
+static const int DAYS_IN_WEEK = 7;
+static const char* DAY_NAMES[DAYS_IN_WEEK] = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
 
 class WeekModel : public QAbstractListModel
 {
@@ -19,6 +25,8 @@ public: // From QAbstractListModel
 
     // For editing
     bool setData( const QModelIndex & index, const QVariant & value, int role = Qt::EditRole);
+private:
+    QVector<DayModel*> m_days;
 };
 
 #endif // WEEKMODEL_H

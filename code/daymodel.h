@@ -12,6 +12,12 @@ class DayModel : public QAbstractListModel
 {
     Q_OBJECT
 public:
+    enum Roles {
+        TitleRole = Qt::UserRole+1
+      };
+
+    static QHash<int, QByteArray> roleNames();
+public:
     DayModel(const QString& day, QObject *parent = 0);
     virtual ~DayModel();
 public: // From QAbstractListModel
@@ -27,6 +33,8 @@ signals:
 
 public slots:
 
+private:
+    void populate();
 private:
     QString m_dayName;
     QVector<Timeslot*> m_slots;

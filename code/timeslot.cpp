@@ -1,5 +1,14 @@
 #include "timeslot.h"
 
+QHash<int, QByteArray> Timeslot::roleNames()
+{
+    QHash<int, QByteArray> roles;
+    roles[StartTimeRole] = "startTime";
+    roles[ItemDataRole] = "itemData";
+    roles[ItemSpanRole] = "hourSpan";
+    return roles;
+}
+
 Timeslot::Timeslot(QTime start, QObject *parent) :
     QObject(parent), m_start(start), m_data("-"), m_hours(1)
 {
@@ -8,15 +17,6 @@ Timeslot::Timeslot(QTime start, QObject *parent) :
 Timeslot::~Timeslot()
 {
 
-}
-
-QHash<int, QByteArray> Timeslot::roleNames()
-{
-    QHash<int, QByteArray> roles;
-    roles[StartTimeRole] = "startTime";
-    roles[ItemDataRole] = "itemData";
-    roles[ItemSpanRole] = "hourSpan";
-    return roles;
 }
 
 void Timeslot::setData(const QString& data)

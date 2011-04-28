@@ -3,17 +3,18 @@
 
 #include <QtCore/QDebug>
 
+QHash<int, QByteArray> DayModel::roleNames()
+{
+    QHash<int, QByteArray> roles;
+    roles[TitleRole] = "title";
+    return roles;
+}
+
 DayModel::DayModel(const QString& day, QObject *parent) :
     QAbstractListModel(parent), m_dayName(day), m_slots(SLOTS_IN_A_DAY)
 {
-    for (int i = 0; i < SLOTS_IN_A_DAY;) {
-        Timeslot *slot = new Timeslot(QTime(i, 0, 0, 0));
-        slot->setData(m_dayName);
-        m_slots[i++] = slot;
-    }
-    setRoleNames(Timeslot::roleNames());
-    m_slots[9]->setSpan(2);
-    m_slots.remove(10);
+    populate();
+    qDebug() << "Created DayModel" << m_dayName;
 }
 
 DayModel::~DayModel()
@@ -35,11 +36,15 @@ int DayModel::rowCount(const QModelIndex &parent) const
 QVariant DayModel::data(const QModelIndex &index, int role) const
 {
     if (index.isValid()) {
-        int row = index.row();
-        if (row >= 0 && row < m_slots.count()) {
-            return m_slots[row]->data(role);
+        if (role == TitleRole) {
+            return QVariant(m_dayName);
         } else {
-            return QVariant("ERR: out-of-bounds");
+            int row = index.row();
+            if (row >= 0 && row < m_slots.count()) {
+                return m_slots[row]->data(role);
+            } else {
+                return QVariant("ERR: out-of-bounds");
+            }
         }
     } else {
         return QVariant("ERR: invalid idx");
@@ -62,4 +67,16 @@ Qt::ItemFlags DayModel::flags( const QModelIndex & index) const
 bool DayModel::setData( const QModelIndex & index, const QVariant & value, int role)
 {
     return true;
+}
+
+void DayModel::populate()
+{
+    for (int i = 0; i < SLOTS_IN_A_DAY;) {
+        Timeslot *slot = new Timeslot(QTime(i, 0, 0, 0));
+        slot->setData(m_dayName);
+        m_slots[i++] = slot;
+    }
+    setRoleNames(Timeslot::roleNames());
+    m_slots[9]->setSpan(2);
+    m_slots.remove(10);
 }

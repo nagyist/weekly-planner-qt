@@ -14,7 +14,7 @@ Item {
             top: parent.top
         }
         height: 100
-        model: WeekModel { id: weekModel }
+        model: week
         delegate: pivotHeaderDelegate
         orientation: ListView.Horizontal
         onCurrentIndexChanged: console.log("change")
@@ -30,6 +30,9 @@ Item {
             Text {
                 anchors.centerIn: parent
                 text: title
+                font {
+                    pixelSize: 32
+                }
             }
             MouseArea {
                 anchors.fill: parent
