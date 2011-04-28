@@ -4,6 +4,7 @@
 #include <QtCore/QAbstractListModel>
 #include <QtCore/QVector>
 
+#include "dayitem.h"
 #include "daymodel.h"
 
 static const int DAYS_IN_WEEK = 7;
@@ -15,7 +16,8 @@ class WeekModel : public QAbstractListModel
 public:
     explicit WeekModel(QObject *parent = 0);
     virtual ~WeekModel();
-
+public:
+    Q_INVOKABLE DayItem* day(int index) const;
 public: // From QAbstractListModel
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
@@ -26,7 +28,7 @@ public: // From QAbstractListModel
     // For editing
     bool setData( const QModelIndex & index, const QVariant & value, int role = Qt::EditRole);
 private:
-    QVector<DayModel*> m_days;
+    QVector<DayItem*> m_days;
 };
 
 #endif // WEEKMODEL_H

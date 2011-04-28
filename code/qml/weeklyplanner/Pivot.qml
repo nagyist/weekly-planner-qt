@@ -17,7 +17,6 @@ Item {
         model: week
         delegate: pivotHeaderDelegate
         orientation: ListView.Horizontal
-        onCurrentIndexChanged: console.log("change")
     }
 
     Component {
@@ -39,17 +38,7 @@ Item {
                 onClicked: {
                     console.log("clicked " + title + " at " + index)
                     headerRow.currentIndex = index;
-                    if (index === 0) {
-                        contentPane.model = monday;
-                    } else if (index === 1) {
-                        contentPane.model = tuesday;
-                    } else if (index === 2) {
-                        contentPane.model = wednesday;
-                    } else if (index === 3) {
-                        contentPane.model = thursday;
-                    } else if (index === 4) {
-                        contentPane.model = friday;
-                    }
+                    contentPane.model = week.day(index);
                 }
             }
         }
@@ -59,7 +48,7 @@ Item {
     Table {
         id: contentPane
         clip: true
-        model: monday
+        model: week.day(0)
         anchors {
             top: headerRow.bottom
             left: parent.left
