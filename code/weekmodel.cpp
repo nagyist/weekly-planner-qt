@@ -13,10 +13,26 @@ WeekModel::~WeekModel()
 
 int WeekModel::rowCount(const QModelIndex &parent) const
 {
-    return 0;
+    return 5;
 }
 
 QVariant WeekModel::data(const QModelIndex &index, int role) const
 {
-    return QVariant();
+    return QVariant("DAY");
+}
+
+QVariant WeekModel::headerData( int section, Qt::Orientation orientation, int role) const
+{
+    return QVariant("HEADER");
+}
+
+Qt::ItemFlags WeekModel::flags( const QModelIndex & index) const
+{
+     return Qt::ItemIsEnabled;
+}
+
+// For editing
+bool WeekModel::setData( const QModelIndex & index, const QVariant & value, int role)
+{
+    return true;
 }
