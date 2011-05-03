@@ -24,9 +24,9 @@ symbian:TARGET.UID3 = 0xE097921D
 # The .cpp file which was generated for your project. Feel free to hack it.
 SOURCES += main.cpp \
     weekmodel.cpp \
-    daymodel.cpp \
     timeslot.cpp \
-    dayitem.cpp
+    day.cpp \
+    daymodel.cpp
 
 # Please do not modify the following two lines. Required for deployment.
 include(qmlapplicationviewer/qmlapplicationviewer.pri)
@@ -34,6 +34,6 @@ qtcAddDeployment()
 
 HEADERS += \
     weekmodel.h \
-    daymodel.h \
     timeslot.h \
-    dayitem.h
+    day.h \
+    daymodel.h

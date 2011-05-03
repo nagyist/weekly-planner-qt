@@ -6,12 +6,13 @@ Item {
     height: 640
 
     property variant model: null
+    property int selectedDay: 0
 
     ListView {
         anchors.fill:  parent
         anchors.margins: 10
 
-        model: container.model
+        model: container.model.items()
         delegate: cellDelegate
     }
 
@@ -19,8 +20,7 @@ Item {
         id: cellDelegate
         Row {
             width: parent.width
-            height: 50*hourSpan
-            z: hourSpan>1 ? 100 : 10
+            height: 50
             Rectangle {
                 id: timeRect
                 width: parent.width / 4
@@ -31,13 +31,19 @@ Item {
                     anchors.centerIn: parent
                     text: startTime
                 }
+                MouseArea {
+                    anchors.fill:  parent
+                    onClicked: {
+                        console.log("click: " + container.model.dayName())
+                        console.log("click: " + startTime)
+                    }
+                }
             }
             Rectangle {
                 id: dataRect
                 width: parent.width / 4*3
-                height: 50*hourSpan
+                height: 50
                 radius: 10
-                color: hourSpan>1 ? "red" : "steelblue"
                 Text {
                     anchors.centerIn: parent
                     text: itemData

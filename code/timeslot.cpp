@@ -16,7 +16,6 @@ Timeslot::Timeslot(QTime start, QObject *parent) :
 
 Timeslot::~Timeslot()
 {
-
 }
 
 void Timeslot::setData(const QString& data)
@@ -47,4 +46,20 @@ QVariant Timeslot::data(int role) const
     default:
         return QVariant();
     }
+}
+
+QString Timeslot::toString() const
+{
+    QString time = m_start.toString("HH:mm");
+    return time;
+}
+
+QString Timeslot::startTime() const
+{
+    return m_start.toString("HH:mm");
+}
+
+QString Timeslot::itemData() const
+{
+    return m_data;
 }

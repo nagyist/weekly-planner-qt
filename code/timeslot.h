@@ -26,15 +26,19 @@ public:
     void setData(const QString& data);
     void setSpan(int hours);
     QVariant data(int role) const;
+
+    QString toString() const;
+
+    QString startTime() const;
+    QString itemData() const;
 signals:
 
 public slots:
 
 private:
     QTime m_start;
-    int m_hours;
     QString m_data;
-
+    int m_hours;
 };
 
 #endif // TIMESLOT_H

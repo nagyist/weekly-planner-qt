@@ -1,8 +1,12 @@
 import QtQuick 1.0
 
 Item {
+    id: container
+
     width: 360
     height: 640
+
+    property int selectedDay: 0
 
     // Pivot headers
     ListView {
@@ -28,7 +32,7 @@ Item {
             radius: 10
             Text {
                 anchors.centerIn: parent
-                text: title
+                text: dayName
                 font {
                     pixelSize: 32
                 }
@@ -36,9 +40,9 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    console.log("clicked " + title + " at " + index)
+                    console.log("clicked " + dayName + " at " + index)
                     headerRow.currentIndex = index;
-                    contentPane.model = week.day(index);
+                    container.selectedDay = index;
                 }
             }
         }
@@ -48,7 +52,10 @@ Item {
     Table {
         id: contentPane
         clip: true
-        model: week.day(0)
+        model: week.day(container.selectedDay)
+        onModelChanged: {
+            console.log("New model");
+        }
         anchors {
             top: headerRow.bottom
             left: parent.left

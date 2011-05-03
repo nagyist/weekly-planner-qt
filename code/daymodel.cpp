@@ -1,57 +1,63 @@
 #include "daymodel.h"
-#include <QtCore/QVariant>
 
 #include <QtCore/QDebug>
 
 QHash<int, QByteArray> DayModel::roleNames()
 {
     QHash<int, QByteArray> roles;
-    roles[TitleRole] = "title";
-    roles[ModelRole] = "dayModel";
+    roles[StartTimeRole] = "startTime";
+    roles[ItemDataRole] = "itemData";
     return roles;
 }
 
 DayModel::DayModel(QObject *parent) :
-    QAbstractListModel(parent), m_slots(SLOTS_IN_A_DAY)
+    QAbstractListModel(parent), m_items()
 {
-    populate();
+    for (int i = 0; i < SLOTS_IN_A_DAY; i++) {
+        Timeslot* slot = new Timeslot(QTime(i,0,0,0));
+        m_items.append(slot);
+        qDebug() << "Created slot" << slot->toString();
+    }
+
+    setRoleNames(DayModel::roleNames());
 }
 
 DayModel::~DayModel()
 {
-    for (int i = 0; i < m_slots.count(); i++) {
-        Timeslot* slot = m_slots[i];
-        m_slots[i] = 0;
-        delete slot;
-        slot = 0;
-    }
-    m_slots.clear();
+    //TODO cleanup
 }
 
 int DayModel::rowCount(const QModelIndex &parent) const
 {
-    return m_slots.count();
+    return m_items.count();
 }
 
 QVariant DayModel::data(const QModelIndex &index, int role) const
 {
     if (index.isValid()) {
-        qDebug() << "Requesting role" << role << "at index" << index.row();
         int row = index.row();
-        if (row >= 0 && row < m_slots.count()) {
-            return m_slots[row]->data(role);
+        qDebug() << "Requested data at row" << row;
+        if (row >= 0 && row < m_items.count()) {
+            Timeslot* slot = m_items[row];
+            if (role == StartTimeRole){
+                return QVariant(slot->startTime());
+            } else if (role == ItemDataRole) {
+                return QVariant(slot->itemData());
+            } else {
+                return QVariant("ERR: Unknown role for weekmodel");
+            }
         } else {
-            return QVariant("ERR: out-of-bounds");
+            return QVariant("ERR: Invalid index");
         }
     } else {
-        return QVariant("ERR: invalid idx");
+        return QVariant("ERR: Invalid index");
     }
     return QVariant("ERR: other");
 }
 
-QVariant DayModel::headerData( int section, Qt::Orientation /*orientation*/, int /*role*/) const
+QVariant DayModel::headerData( int section, Qt::Orientation orientation, int role) const
 {
-    return QVariant();
+    return QVariant("HEADER");
 }
 
 Qt::ItemFlags DayModel::flags( const QModelIndex & index) const
@@ -59,21 +65,8 @@ Qt::ItemFlags DayModel::flags( const QModelIndex & index) const
     return Qt::ItemIsEnabled;
 }
 
-
 // For editing
 bool DayModel::setData( const QModelIndex & index, const QVariant & value, int role)
 {
     return true;
-}
-
-void DayModel::populate()
-{
-    for (int i = 0; i < SLOTS_IN_A_DAY;) {
-        Timeslot *slot = new Timeslot(QTime(i, 0, 0, 0));
-        slot->setData("SLOT");
-        m_slots[i++] = slot;
-    }
-    setRoleNames(Timeslot::roleNames());
-    m_slots[9]->setSpan(2);
-    m_slots.remove(10);
 }
