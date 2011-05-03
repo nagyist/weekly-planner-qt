@@ -39,7 +39,6 @@ QVariant DayModel::data(const QModelIndex &index, int role) const
 {
     if (index.isValid()) {
         int row = index.row();
-        qDebug() << "Requested data at row" << row;
         if (row >= 0 && row < m_items.count()) {
             Timeslot* slot = m_items[row];
             if (role == StartTimeRole){
