@@ -19,7 +19,7 @@ public:
       };
     static QHash<int, QByteArray> roleNames();
 public:
-    explicit DayModel(QObject *parent = 0);
+    explicit DayModel(const QString& name, QObject *parent = 0);
     virtual ~DayModel();
 public: // From QAbstractListModel
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
@@ -29,6 +29,7 @@ public: // From QAbstractListModel
     bool setData( const QModelIndex & index, const QVariant & value, int role = Qt::EditRole);
 
 private:
+    QString m_dayName;
     QList<Timeslot*> m_items;
 };
 

@@ -13,7 +13,7 @@ QHash<int, QByteArray> Day::roleNames()
 Day::Day(const QString& name, QObject *parent) :
     QObject(parent), m_dayName(name)
 {
-    m_model = new DayModel(this);
+    m_model = new DayModel(m_dayName, this);
 }
 
 Day::~Day()
@@ -32,7 +32,6 @@ void Day::setData(const QString& data)
 
 QVariant Day::data(int role) const
 {
-    qDebug() << "Requesting data from day" << m_dayName << "for role" << role;
     switch (role) {
     case ItemDataRole:
         return QVariant(dayName());

@@ -11,11 +11,13 @@ QHash<int, QByteArray> DayModel::roleNames()
     return roles;
 }
 
-DayModel::DayModel(QObject *parent) :
-    QAbstractListModel(parent), m_items()
+DayModel::DayModel(const QString& name, QObject *parent) :
+    QAbstractListModel(parent), m_dayName(name), m_items()
 {
+    QString templateItem("Day %1 Item %2");
     for (int i = 0; i < SLOTS_IN_A_DAY; i++) {
         Timeslot* slot = new Timeslot(QTime(i,0,0,0));
+        slot->setItemData(templateItem.arg(m_dayName).arg(i));
         m_items.append(slot);
         qDebug() << "Created slot" << slot->toString();
     }

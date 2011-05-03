@@ -8,6 +8,7 @@ QML_IMPORT_PATH =
 
 symbian:TARGET.UID3 = 0xE097921D
 
+
 # Allow network access on Symbian
 #symbian:TARGET.CAPABILITY += NetworkServices
 

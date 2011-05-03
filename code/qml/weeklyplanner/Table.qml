@@ -31,13 +31,6 @@ Item {
                     anchors.centerIn: parent
                     text: startTime
                 }
-                MouseArea {
-                    anchors.fill:  parent
-                    onClicked: {
-                        console.log("click: " + container.model.dayName())
-                        console.log("click: " + startTime)
-                    }
-                }
             }
             Rectangle {
                 id: dataRect
@@ -46,7 +39,7 @@ Item {
                 radius: 10
                 Text {
                     anchors.centerIn: parent
-                    text: itemData + ":" + hourSpan
+                    text: itemData + " for " + hourSpan + " hours"
                 }
             }
         }
