@@ -1,14 +1,5 @@
 #include "timeslot.h"
 
-QHash<int, QByteArray> Timeslot::roleNames()
-{
-    QHash<int, QByteArray> roles;
-    roles[StartTimeRole] = "startTime";
-    roles[ItemDataRole] = "itemData";
-    roles[ItemSpanRole] = "hourSpan";
-    return roles;
-}
-
 Timeslot::Timeslot(QTime start, QObject *parent) :
     QObject(parent), m_start(start), m_data("-"), m_hours(1)
 {
@@ -18,7 +9,15 @@ Timeslot::~Timeslot()
 {
 }
 
-void Timeslot::setData(const QString& data)
+void Timeslot::setStartTime(QTime& time)
+{
+    if (time != m_start) {
+        m_start = time;
+        emit dataChanged();
+    }
+}
+
+void Timeslot::setItemData(const QString& data)
 {
     if (data != m_data) {
         m_data = data;
@@ -26,32 +25,12 @@ void Timeslot::setData(const QString& data)
     }
 }
 
-void Timeslot::setSpan(int hours)
+void Timeslot::setHourSpan(int hours)
 {
     if (hours != m_hours) {
         m_hours = hours;
         emit dataChanged();
     }
-}
-
-QVariant Timeslot::data(int role) const
-{
-    switch (role) {
-    case StartTimeRole:
-        return QVariant(m_start.toString());
-    case ItemDataRole:
-        return QVariant(m_data);
-    case ItemSpanRole:
-        return QVariant(m_hours);
-    default:
-        return QVariant();
-    }
-}
-
-QString Timeslot::toString() const
-{
-    QString time = m_start.toString("HH:mm");
-    return time;
 }
 
 QString Timeslot::startTime() const
@@ -62,4 +41,14 @@ QString Timeslot::startTime() const
 QString Timeslot::itemData() const
 {
     return m_data;
+}
+
+int Timeslot::hourSpan() const
+{
+    return m_hours;
+}
+
+QString Timeslot::toString() const
+{
+    return startTime() + "+" + hourSpan() + ": " + itemData();
 }

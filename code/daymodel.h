@@ -14,7 +14,8 @@ class DayModel : public QAbstractListModel
 public:
     enum Roles {
         StartTimeRole = Qt::UserRole+1,
-        ItemDataRole
+        ItemDataRole,
+        HourSpanRole
       };
     static QHash<int, QByteArray> roleNames();
 public:

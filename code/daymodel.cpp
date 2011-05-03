@@ -7,6 +7,7 @@ QHash<int, QByteArray> DayModel::roleNames()
     QHash<int, QByteArray> roles;
     roles[StartTimeRole] = "startTime";
     roles[ItemDataRole] = "itemData";
+    roles[HourSpanRole] = "hourSpan";
     return roles;
 }
 
@@ -43,6 +44,8 @@ QVariant DayModel::data(const QModelIndex &index, int role) const
                 return QVariant(slot->startTime());
             } else if (role == ItemDataRole) {
                 return QVariant(slot->itemData());
+            } else if (role == HourSpanRole) {
+                return QVariant(slot->hourSpan());
             } else {
                 return QVariant("ERR: Unknown role for weekmodel");
             }

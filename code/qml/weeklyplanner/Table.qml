@@ -46,7 +46,7 @@ Item {
                 radius: 10
                 Text {
                     anchors.centerIn: parent
-                    text: itemData
+                    text: itemData + ":" + hourSpan
                 }
             }
         }
