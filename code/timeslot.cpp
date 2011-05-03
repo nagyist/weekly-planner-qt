@@ -50,5 +50,5 @@ int Timeslot::hourSpan() const
 
 QString Timeslot::toString() const
 {
-    return startTime() + "+" + hourSpan() + ": " + itemData();
+    return startTime() + ": " + itemData();
 }

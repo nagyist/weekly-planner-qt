@@ -7,7 +7,6 @@ QHash<int, QByteArray> WeekModel::roleNames()
 {
     QHash<int, QByteArray> roles;
     roles[DayNameRole] = "dayName";
-    roles[DayRole] = "day";
     return roles;
 }
 
@@ -24,7 +23,13 @@ WeekModel::WeekModel(QObject *parent) :
 
 WeekModel::~WeekModel()
 {
-    //TODO cleanup
+    for (int i = 0; i < m_days.count(); i++) {
+        Day* day = m_days.at(i);
+        m_days[i] = 0;
+        delete day;
+        day = 0;
+    }
+    m_days.clear();
 }
 
 int WeekModel::rowCount(const QModelIndex &parent) const

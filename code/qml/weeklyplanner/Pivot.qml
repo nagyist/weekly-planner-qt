@@ -54,7 +54,7 @@ Item {
         clip: true
         model: week.day(container.selectedDay)
         onModelChanged: {
-            console.log("New model");
+            console.log("Tablemodel changed");
         }
         anchors {
             top: headerRow.bottom

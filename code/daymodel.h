@@ -2,6 +2,7 @@
 #define DAYMODEL_H
 
 #include <QtCore/QAbstractListModel>
+#include <QtCore/QVariant>
 #include <QtCore/QList>
 
 #include "timeslot.h"
@@ -27,7 +28,8 @@ public: // From QAbstractListModel
     QVariant headerData( int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
     Qt::ItemFlags flags( const QModelIndex & index) const;
     bool setData( const QModelIndex & index, const QVariant & value, int role = Qt::EditRole);
-
+public slots:
+    void setHourSpan(int index, int hourSpan);
 private:
     QString m_dayName;
     QList<Timeslot*> m_items;

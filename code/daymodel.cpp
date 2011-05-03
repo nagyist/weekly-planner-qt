@@ -21,8 +21,9 @@ DayModel::DayModel(const QString& name, QObject *parent) :
         m_items.append(slot);
         qDebug() << "Created slot" << slot->toString();
     }
-
     setRoleNames(DayModel::roleNames());
+
+    setHourSpan(9, 3);
 }
 
 DayModel::~DayModel()
@@ -48,7 +49,7 @@ QVariant DayModel::data(const QModelIndex &index, int role) const
             } else if (role == HourSpanRole) {
                 return QVariant(slot->hourSpan());
             } else {
-                return QVariant("ERR: Unknown role for weekmodel");
+                return QVariant("ERR: Unknown role for daymodel");
             }
         } else {
             return QVariant("ERR: Invalid index");
@@ -73,4 +74,13 @@ Qt::ItemFlags DayModel::flags( const QModelIndex & index) const
 bool DayModel::setData( const QModelIndex & index, const QVariant & value, int role)
 {
     return true;
+}
+
+void DayModel::setHourSpan(int index, int hourSpan)
+{
+    if (index >= 0 && index < m_items.count()) {
+        m_items[index]->setHourSpan(hourSpan);
+        // TODO remove hourSpan next items
+    }
+
 }

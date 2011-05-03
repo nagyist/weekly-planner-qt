@@ -16,8 +16,7 @@ class WeekModel : public QAbstractListModel
     Q_OBJECT
 public:
     enum Roles {
-        DayNameRole = Qt::UserRole+1,
-        DayRole
+        DayNameRole = Qt::UserRole+1
       };
     static QHash<int, QByteArray> roleNames();
 public:

@@ -20,11 +20,12 @@ Item {
         id: cellDelegate
         Row {
             width: parent.width
-            height: 50
+            height: 50*hourSpan
             Rectangle {
                 id: timeRect
                 width: parent.width / 4
-                height: 50
+                height: 50*hourSpan
+                z: hourSpan > 1 ? 10 : 1
                 radius: 10
                 color: "green"
                 Text {
@@ -35,8 +36,10 @@ Item {
             Rectangle {
                 id: dataRect
                 width: parent.width / 4*3
-                height: 50
+                height: 50*hourSpan
                 radius: 10
+                z: hourSpan > 1 ? 10 : 1
+                color: hourSpan > 1 ? "red" : "steelblue"
                 Text {
                     anchors.centerIn: parent
                     text: itemData + " for " + hourSpan + " hours"

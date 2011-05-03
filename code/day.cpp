@@ -3,13 +3,6 @@
 
 #include <QtCore/QDebug>
 
-QHash<int, QByteArray> Day::roleNames()
-{
-    QHash<int, QByteArray> roles;
-    roles[ItemDataRole] = "itemData";
-    return roles;
-}
-
 Day::Day(const QString& name, QObject *parent) :
     QObject(parent), m_dayName(name)
 {
@@ -19,25 +12,6 @@ Day::Day(const QString& name, QObject *parent) :
 Day::~Day()
 {
     delete m_model;
-}
-
-void Day::setData(const QString& data)
-{
-    if (data != m_dayName) {
-        m_dayName = data;
-        emit dataChanged();
-    }
-}
-
-
-QVariant Day::data(int role) const
-{
-    switch (role) {
-    case ItemDataRole:
-        return QVariant(dayName());
-    default:
-        return QVariant("ERR: Unknown role");
-    }
 }
 
 QObject* Day::items() const
