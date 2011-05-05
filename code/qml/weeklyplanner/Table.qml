@@ -7,6 +7,7 @@ Item {
 
     property variant model: null
     property int selectedDay: 0
+    property int numberOfColumnsToShow: 1
 
     ListView {
         anchors.fill:  parent

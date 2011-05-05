@@ -16,7 +16,11 @@ int main(int argc, char *argv[])
 
     viewer.setOrientation(QmlApplicationViewer::ScreenOrientationAuto);
     viewer.setMainQmlFile(QLatin1String("qml/weeklyplanner/main.qml"));
+#ifdef QT_SIMULATOR
+    viewer.showFullScreen();
+#else
     viewer.showExpanded();
+#endif
 
     return app.exec();
 }

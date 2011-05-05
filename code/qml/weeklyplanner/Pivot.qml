@@ -1,10 +1,13 @@
 import QtQuick 1.0
+import Qt.labs.gestures 1.0
 
 Item {
     id: container
 
     width: 360
     height: 640
+
+    property bool landscape: container.width > container.height
 
     property int selectedDay: 0
 
@@ -53,6 +56,7 @@ Item {
         id: contentPane
         clip: true
         model: week.day(container.selectedDay)
+        numberOfColumnsToShow: container.landscape ? 2 : 1
         onModelChanged: {
             console.log("Tablemodel changed");
         }
@@ -61,6 +65,10 @@ Item {
             left: parent.left
             right: parent.right
             bottom: parent.bottom
+        }
+        GestureArea {
+            anchors.fill: parent
+            onTap: console.log("tap");
         }
     }
 }
