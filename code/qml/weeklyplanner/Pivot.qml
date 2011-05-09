@@ -66,9 +66,18 @@ Item {
             right: parent.right
             bottom: parent.bottom
         }
+        /*
         GestureArea {
             anchors.fill: parent
-            onTap: console.log("tap");
-        }
+            onPan: {
+                console.log("pan delta = (",gesture.delta.x,",",gesture.delta.y,") acceleration = ",gesture.acceleration);
+            }
+            onSwipe: {
+                console.log("swipe angle=",gesture.swipeAngle);
+            }
+            onGesture: {
+                console.log("gesture hot spot = (",gesture.hotSpot.x,",",gesture.hotSpot.y,")");
+            }
+        }*/
     }
 }

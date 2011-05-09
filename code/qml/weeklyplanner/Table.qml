@@ -1,6 +1,6 @@
 import QtQuick 1.0
 
-Item {
+Flickable {
     id: container
     width: 360
     height: 640
@@ -9,12 +9,63 @@ Item {
     property int selectedDay: 0
     property int numberOfColumnsToShow: 1
 
-    ListView {
-        anchors.fill:  parent
-        anchors.margins: 10
+    property int dayWidth: container.width - 20;
 
-        model: container.model.items()
-        delegate: cellDelegate
+    contentWidth:  7*container.width
+    contentHeight: container.height
+    Row {
+        anchors.fill: parent
+        anchors.margins: 10
+        spacing: 10
+        ListView {
+            id: monday
+            width: dayWidth
+            height: container.height
+            model: container.model.items()
+            delegate: cellDelegate
+        }
+        ListView {
+            id: tuesday
+            height: container.height
+            width: dayWidth
+            model: container.model.items()
+            delegate: cellDelegate
+        }
+        ListView {
+            id: wednesday
+            height: container.height
+            width: dayWidth
+            model: container.model.items()
+            delegate: cellDelegate
+        }
+        ListView {
+            id: thursday
+            height: container.height
+            width: dayWidth
+            model: container.model.items()
+            delegate: cellDelegate
+        }
+        ListView {
+            id: friday
+            height: container.height
+            width: dayWidth
+            model: container.model.items()
+            delegate: cellDelegate
+        }
+        ListView {
+            id: saturday
+            height: container.height
+            width: dayWidth
+            model: container.model.items()
+            delegate: cellDelegate
+        }
+        ListView {
+            id: sunday
+            height: container.height
+            width: dayWidth
+            model: container.model.items()
+            delegate: cellDelegate
+        }
     }
 
     Component {
