@@ -9,13 +9,32 @@ Flickable {
     property int selectedDay: 0
     property int numberOfColumnsToShow: 1
 
-    property int dayWidth: container.width - 20;
+    property int dayWidth: numberOfColumnsToShow === 1 ? container.width - hourColumn.width - 30 : (container.width - 40)/2;
 
     contentWidth:  7*container.width
     contentHeight: container.height
+    ListView {
+        id: hourColumn
+        anchors {
+            left: parent.left
+            top: parent.top
+            bottom:  parent.bottom
+            margins: 10
+        }
+        width: 80
+        model: container.model.items()
+        delegate: hourDelegate
+    }
+
     Row {
-        anchors.fill: parent
-        anchors.margins: 10
+        anchors {
+            top: parent.top
+            bottom: parent.bottom
+            right: parent.right
+            left: hourColumn.right
+            margins: 10
+        }
+
         spacing: 10
         ListView {
             id: monday
@@ -69,25 +88,28 @@ Flickable {
     }
 
     Component {
+        id: hourDelegate
+        Rectangle {
+            id: hourRect
+            width: parent.width
+            height: 50*hourSpan
+            z: hourSpan > 1 ? 10 : 1
+            radius: 10
+            color: "green"
+            Text {
+                anchors.centerIn: parent
+                text: startTime
+            }
+        }
+    }
+    Component {
         id: cellDelegate
         Row {
             width: parent.width
             height: 50*hourSpan
             Rectangle {
-                id: timeRect
-                width: parent.width / 4
-                height: 50*hourSpan
-                z: hourSpan > 1 ? 10 : 1
-                radius: 10
-                color: "green"
-                Text {
-                    anchors.centerIn: parent
-                    text: startTime
-                }
-            }
-            Rectangle {
                 id: dataRect
-                width: parent.width / 4*3
+                width: parent.width
                 height: 50*hourSpan
                 radius: 10
                 z: hourSpan > 1 ? 10 : 1
