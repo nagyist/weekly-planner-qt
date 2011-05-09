@@ -11,7 +11,7 @@ Flickable {
 
     property int dayWidth: numberOfColumnsToShow === 1 ? container.width - hourColumn.width - 30 : (container.width - hourColumn.width - 40)/2;
 
-    contentWidth:  7*container.width
+    contentWidth: 7*container.width
     contentHeight: container.height
     ListView {
         id: hourColumn
@@ -24,6 +24,7 @@ Flickable {
         width: 80
         model: container.model.items()
         delegate: hourDelegate
+        snapMode: ListView.SnapToItem
     }
 
     Row {
@@ -42,6 +43,7 @@ Flickable {
             height: container.height
             model: container.model.items()
             delegate: cellDelegate
+            snapMode: ListView.SnapToItem
         }
         ListView {
             id: tuesday
@@ -49,6 +51,7 @@ Flickable {
             width: dayWidth
             model: container.model.items()
             delegate: cellDelegate
+            snapMode: ListView.SnapToItem
         }
         ListView {
             id: wednesday
@@ -56,6 +59,7 @@ Flickable {
             width: dayWidth
             model: container.model.items()
             delegate: cellDelegate
+            snapMode: ListView.SnapToItem
         }
         ListView {
             id: thursday
@@ -63,6 +67,7 @@ Flickable {
             width: dayWidth
             model: container.model.items()
             delegate: cellDelegate
+            snapMode: ListView.SnapToItem
         }
         ListView {
             id: friday
@@ -70,6 +75,7 @@ Flickable {
             width: dayWidth
             model: container.model.items()
             delegate: cellDelegate
+            snapMode: ListView.SnapToItem
         }
         ListView {
             id: saturday
@@ -77,6 +83,7 @@ Flickable {
             width: dayWidth
             model: container.model.items()
             delegate: cellDelegate
+            snapMode: ListView.SnapToItem
         }
         ListView {
             id: sunday
@@ -84,6 +91,7 @@ Flickable {
             width: dayWidth
             model: container.model.items()
             delegate: cellDelegate
+            snapMode: ListView.SnapToItem
         }
     }
 
