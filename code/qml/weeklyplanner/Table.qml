@@ -9,7 +9,7 @@ Flickable {
     property int selectedDay: 0
     property int numberOfColumnsToShow: 1
 
-    property int dayWidth: numberOfColumnsToShow === 1 ? container.width - hourColumn.width - 30 : (container.width - 40)/2;
+    property int dayWidth: numberOfColumnsToShow === 1 ? container.width - hourColumn.width - 30 : (container.width - hourColumn.width - 40)/2;
 
     contentWidth:  7*container.width
     contentHeight: container.height
