@@ -4,6 +4,7 @@ Flickable {
     id: container
     width: 360
     height: 640
+    boundsBehavior: Flickable.StopAtBounds
 
     property variant model: null
     property int selectedDay: 0
@@ -11,7 +12,9 @@ Flickable {
 
     property int dayWidth: numberOfColumnsToShow === 1 ? container.width - hourColumn.width - 30 : (container.width - hourColumn.width - 40)/2;
 
-    contentWidth: 7*container.width
+    property int contentY: 0
+
+    contentWidth: hourColumn.width + 7*(dayWidth+dayRow.spacing)+20
     contentHeight: container.height
     ListView {
         id: hourColumn
@@ -25,9 +28,12 @@ Flickable {
         model: container.model.items()
         delegate: hourDelegate
         snapMode: ListView.SnapToItem
+        onContentYChanged: container.contentY = contentY
+        contentY: container.contentY
     }
 
     Row {
+        id: dayRow
         anchors {
             top: parent.top
             bottom: parent.bottom
@@ -44,6 +50,8 @@ Flickable {
             model: container.model.items()
             delegate: cellDelegate
             snapMode: ListView.SnapToItem
+            onContentYChanged: container.contentY = contentY
+            contentY: container.contentY
         }
         ListView {
             id: tuesday
@@ -52,6 +60,8 @@ Flickable {
             model: container.model.items()
             delegate: cellDelegate
             snapMode: ListView.SnapToItem
+            onContentYChanged: container.contentY = contentY
+            contentY: container.contentY
         }
         ListView {
             id: wednesday
@@ -60,6 +70,8 @@ Flickable {
             model: container.model.items()
             delegate: cellDelegate
             snapMode: ListView.SnapToItem
+            onContentYChanged: container.contentY = contentY
+            contentY: container.contentY
         }
         ListView {
             id: thursday
@@ -68,6 +80,8 @@ Flickable {
             model: container.model.items()
             delegate: cellDelegate
             snapMode: ListView.SnapToItem
+            onContentYChanged: container.contentY = contentY
+            contentY: container.contentY
         }
         ListView {
             id: friday
@@ -76,6 +90,8 @@ Flickable {
             model: container.model.items()
             delegate: cellDelegate
             snapMode: ListView.SnapToItem
+            onContentYChanged: container.contentY = contentY
+            contentY: container.contentY
         }
         ListView {
             id: saturday
@@ -84,6 +100,8 @@ Flickable {
             model: container.model.items()
             delegate: cellDelegate
             snapMode: ListView.SnapToItem
+            onContentYChanged: container.contentY = contentY
+            contentY: container.contentY
         }
         ListView {
             id: sunday
@@ -92,6 +110,8 @@ Flickable {
             model: container.model.items()
             delegate: cellDelegate
             snapMode: ListView.SnapToItem
+            onContentYChanged: container.contentY = contentY
+            contentY: container.contentY
         }
     }
 
