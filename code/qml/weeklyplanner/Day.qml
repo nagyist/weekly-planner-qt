@@ -23,33 +23,8 @@ Item {
 
         anchors.fill: parent
         model: dayContainer.model
-        delegate: dayDelegate
+        delegate: Cell{}
         snapMode: ListView.SnapToItem
         interactive: false
-
-        Component {
-            id: dayDelegate
-            Rectangle {
-                Component.onCompleted: {
-                    console.log("Component " + itemData + " created on QML side!")
-                }
-
-                id: dataRect
-                width: dayContainer.width
-                height: 50*hourSpan
-                radius: 10
-                z: hourSpan > 1 ? 10 : 1
-                color: hourSpan > 1 ? "red" : "steelblue"
-                Text {
-                    anchors.centerIn: parent
-                    text: itemData + " for " + hourSpan + " hours"
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: console.log("Clicked on: " + itemData)
-                }
-            }
-        }
     }
 }
