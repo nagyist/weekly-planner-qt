@@ -83,4 +83,6 @@ void DayModel::setHourSpan(int index, int hourSpan)
         // TODO remove hourSpan next items
     }
 
+    for (int i = hourSpan-1; i > 0; i-- )
+        m_items.removeAt(index+i);
 }

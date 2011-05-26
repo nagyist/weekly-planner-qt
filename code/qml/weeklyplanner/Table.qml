@@ -2,151 +2,82 @@ import QtQuick 1.0
 
 Flickable {
     id: container
-    width: 360
-    height: 640
+    width: parent.width
+    height: parent.height
+    clip: true
     boundsBehavior: Flickable.StopAtBounds
 
     property variant model: null
     property int selectedDay: 0
     property int numberOfColumnsToShow: 1
-
-    property int dayWidth: numberOfColumnsToShow === 1 ? container.width - hourColumn.width - 30 : (container.width - hourColumn.width - 40)/2;
-
+    property int dayWidth: numberOfColumnsToShow == 1 ? container.width - hourColumn.width - 30 : (container.width - hourColumn.width - 40)/2;
     property int contentY: 0
 
     contentWidth: hourColumn.width + 7*(dayWidth+dayRow.spacing)+20
-    contentHeight: container.height
-    ListView {
+    contentHeight: hourColumn.height + monday.height
+    flickableDirection: Flickable.VerticalFlick
+
+    Component.onCompleted: {
+        console.log("Flicakble table dimensions: (" + container.width + "x" + container.height + ")"
+                    + " content dim: (" + container.contentWidth + "x" + container.contentHeight + ")"
+                    + " dayWidth: " + container.dayWidth)
+    }
+
+    // This'll display the hour slots on the left
+    HourColumn {
         id: hourColumn
+
         anchors {
             left: parent.left
             top: parent.top
-            bottom:  parent.bottom
+            bottom: parent.bottom
             margins: 10
         }
-        width: 80
-        model: container.model.items()
-        delegate: hourDelegate
-        snapMode: ListView.SnapToItem
-        onContentYChanged: container.contentY = contentY
-        contentY: container.contentY
     }
 
+    // The actual views (in a row)
     Row {
         id: dayRow
         anchors {
+            left: hourColumn.right
             top: parent.top
             bottom: parent.bottom
-            right: parent.right
-            left: hourColumn.right
-            margins: 10
         }
 
-        spacing: 10
-        ListView {
+        Day {
             id: monday
-            width: dayWidth
-            height: container.height
-            model: container.model.items()
-            delegate: cellDelegate
-            snapMode: ListView.SnapToItem
-            onContentYChanged: container.contentY = contentY
-            contentY: container.contentY
+            width: container.dayWidth
+            model: container.model.day(0).items()
         }
-        ListView {
+        Day {
             id: tuesday
-            height: container.height
-            width: dayWidth
-            model: container.model.items()
-            delegate: cellDelegate
-            snapMode: ListView.SnapToItem
-            onContentYChanged: container.contentY = contentY
-            contentY: container.contentY
+            width: container.dayWidth
+            model: container.model.day(1).items()
         }
-        ListView {
+        Day {
             id: wednesday
-            height: container.height
-            width: dayWidth
-            model: container.model.items()
-            delegate: cellDelegate
-            snapMode: ListView.SnapToItem
-            onContentYChanged: container.contentY = contentY
-            contentY: container.contentY
+            width: container.dayWidth
+            model: container.model.day(2).items()
         }
-        ListView {
+        Day {
             id: thursday
-            height: container.height
-            width: dayWidth
-            model: container.model.items()
-            delegate: cellDelegate
-            snapMode: ListView.SnapToItem
-            onContentYChanged: container.contentY = contentY
-            contentY: container.contentY
+            width: container.dayWidth
+            model: container.model.day(3).items()
         }
-        ListView {
+        Day {
             id: friday
-            height: container.height
-            width: dayWidth
-            model: container.model.items()
-            delegate: cellDelegate
-            snapMode: ListView.SnapToItem
-            onContentYChanged: container.contentY = contentY
-            contentY: container.contentY
+            width: container.dayWidth
+            model: container.model.day(4).items()
         }
-        ListView {
+        Day {
             id: saturday
-            height: container.height
-            width: dayWidth
-            model: container.model.items()
-            delegate: cellDelegate
-            snapMode: ListView.SnapToItem
-            onContentYChanged: container.contentY = contentY
-            contentY: container.contentY
+            width: container.dayWidth
+            model: container.model.day(5).items()
         }
-        ListView {
+        Day {
             id: sunday
-            height: container.height
-            width: dayWidth
-            model: container.model.items()
-            delegate: cellDelegate
-            snapMode: ListView.SnapToItem
-            onContentYChanged: container.contentY = contentY
-            contentY: container.contentY
-        }
-    }
-
-    Component {
-        id: hourDelegate
-        Rectangle {
-            id: hourRect
-            width: parent.width
-            height: 50*hourSpan
-            z: hourSpan > 1 ? 10 : 1
-            radius: 10
-            color: "green"
-            Text {
-                anchors.centerIn: parent
-                text: startTime
-            }
-        }
-    }
-    Component {
-        id: cellDelegate
-        Row {
-            width: parent.width
-            height: 50*hourSpan
-            Rectangle {
-                id: dataRect
-                width: parent.width
-                height: 50*hourSpan
-                radius: 10
-                z: hourSpan > 1 ? 10 : 1
-                color: hourSpan > 1 ? "red" : "steelblue"
-                Text {
-                    anchors.centerIn: parent
-                    text: itemData + " for " + hourSpan + " hours"
-                }
-            }
+            width: container.dayWidth
+            model: container.model.day(6).items()
         }
     }
 }
