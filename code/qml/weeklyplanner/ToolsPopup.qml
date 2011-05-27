@@ -4,7 +4,7 @@ Rectangle {
     id: toolsPopup
 
     width: 155
-    height: 55
+    height: 56
     color: "gray"
     // Hidden by default
     opacity: 0
@@ -17,12 +17,15 @@ Rectangle {
 
     Row {
         spacing: 2
+        width: parent.width
+        height: parent.height
 
         // Three buttons
         Button {
             buttonName: "editButton"
             bgImage: "gfx/info.png"
             bgImagePressed: "gfx/info.png"
+            anchors.verticalCenter: parent.verticalCenter
 
             width: 49
             height: 49
@@ -41,6 +44,7 @@ Rectangle {
             buttonName: "copyButton"
             bgImage: "gfx/zoom_out.png"
             bgImagePressed: "gfx/zoom_out.png"
+            anchors.verticalCenter: parent.verticalCenter
 
             width: 49
             height: 49
@@ -56,6 +60,7 @@ Rectangle {
             buttonName: "pasteButton"
             bgImage: "gfx/zoom_out.png"
             bgImagePressed: "gfx/zoom_out.png"
+            anchors.verticalCenter: parent.verticalCenter
 
             width: 49
             height: 49
@@ -71,41 +76,17 @@ Rectangle {
     Timer {
         id: hideTimer
         interval: toolsPopup.timeout
-        running: false
+        running: toolsPopup.opacity > 0 ? true : false
         repeat: false
-        onTriggered: toolsPopup.state = ""
+        onTriggered: {
+            toolsPopup.opacity = 0
+        }
     }
 
-    states: [
-        State {
-            name: "visible"
-            PropertyChanges {
-                target: toolsPopup
-                opacity: 1.0
-            }
-            PropertyChanges {
-                target: hideTimer
-                running: true
-            }
+    Behavior on opacity {
+        NumberAnimation {
+            duration: 350
+            easing.type: Easing.InOutQuad
         }
-    ]
-
-    transitions: [
-        Transition {
-            from: ""
-            to: "visible"
-            PropertyAnimation {
-                target: toolsPopup
-                properties: "opacity"
-                duration: 200 }
-        },
-        Transition {
-            from: "visible"
-            to: ""
-            NumberAnimation {
-                target: toolsPopup
-                properties: "opacity"
-                duration: 500 }
-        }
-    ]
+    }
 }

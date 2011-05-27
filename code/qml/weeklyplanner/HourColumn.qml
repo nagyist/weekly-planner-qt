@@ -8,6 +8,7 @@ ListView {
     }
 
     width: 80
+
     model: hourModel
     delegate: hourDelegate
     snapMode: ListView.SnapToItem
@@ -17,25 +18,34 @@ ListView {
 
     Component {
         id: hourDelegate
+
         Rectangle {
+            id: hourRect
+
             Component.onCompleted: {
                 console.log("HourItem " + startTime + " created on QML side!")
             }
 
-            id: hourRect
             width: parent.width
             height: 50
-            radius: 10
-            color: "green"
+            border.color: "white"
+            border.width: 2
+            //radius: 10
+            color: "#666666"
+
             Text {
+                color: "white"
+                //font.bold: true
                 anchors.centerIn: parent
                 text: startTime
             }
+
         }
     }
 
     ListModel {
         id: hourModel
+
         ListElement {
             startTime: "00:00"
         }

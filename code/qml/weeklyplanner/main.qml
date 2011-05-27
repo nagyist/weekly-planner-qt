@@ -1,11 +1,10 @@
 import QtQuick 1.0
 
-Rectangle {
+Item {
     id: container
 
     width: 360
     height: 640
-    color: "lightsteelblue"
 
     Pivot {
         id: mainPivot

@@ -1,7 +1,5 @@
 import QtQuick 1.0
 
-
-
 Rectangle {
     id: cellDelegate
 
@@ -9,13 +7,29 @@ Rectangle {
         console.log("Component " + itemData + " created on QML side!")
     }
 
-    width: dayContainer.width
+    width: parent.width
     height: 50*hourSpan
-    radius: 10
+    border.color: "white"
+    border.width: 2
+    //radius: 10
     z: hourSpan > 1 ? 10 : 1
-    color: hourSpan > 1 ? "red" : "steelblue"
+    color: hourSpan > 1 ? "#848484" : "#666666"
+
     Text {
+        id: cellText
+
+        color: "white"
+        //font.bold: true
         anchors.centerIn: parent
+        text: itemData + " for " + hourSpan + " hours"
+    }
+
+    TextEdit {
+        id: cellEdit
+        width: parent.width
+        height: parent.height
+        anchors.centerIn: parent
+        visible: false
         text: itemData + " for " + hourSpan + " hours"
     }
 
@@ -24,7 +38,7 @@ Rectangle {
         // Todo, on clicked, show the tools!
         onClicked: {
             console.log("Clicked on: " + itemData)
-            tools.state = "visible"
+            tools.opacity = 1
         }
     }
 
@@ -36,6 +50,11 @@ Rectangle {
             left: parent.left
         }
 
-        onEdit: console.log("onEdit() signal captured!")
+        onEdit: {
+            console.log("onEdit() signal captured!")
+            cellText.visible = false
+            cellEdit.visible = true
+            cellEdit.focus = true
+        }
     }
 }

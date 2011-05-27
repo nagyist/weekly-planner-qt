@@ -8,20 +8,20 @@ Item {
     height: 640
 
     property bool landscape: container.width > container.height
-
     property int selectedDay: 0
     property int contentY: 0
 
     // Pivot headers
     ListView {
         id: headerRow
+
         property int pivotHeaderWidth: 200
         anchors {
             left: parent.left
             right: parent.right
             top: parent.top
         }
-        height: 100
+        height: 60
         model: week
         delegate: pivotHeaderDelegate
         orientation: ListView.Horizontal
@@ -29,18 +29,24 @@ Item {
 
     Component {
         id: pivotHeaderDelegate
+
         Rectangle {
             height: parent.height
             width: headerRow.pivotHeaderWidth
-            color: "steelblue"
-            radius: 10
+            border.color: "white"
+            border.width: 2
+
+            color: "#666666"
+            //radius: 10
             Text {
+                color: "white"
                 anchors.centerIn: parent
                 text: dayName
                 font {
                     pixelSize: 32
                 }
             }
+
             MouseArea {
                 anchors.fill: parent
                 onClicked: {

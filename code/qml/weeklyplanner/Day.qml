@@ -15,7 +15,7 @@ Item {
     anchors {
         top: parent.top
         bottom: parent.bottom
-        margins: 10
+        margins: 1
     }
 
     ListView {
