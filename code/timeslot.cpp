@@ -1,4 +1,5 @@
 #include "timeslot.h"
+#include <QtCore/QDebug>
 
 Timeslot::Timeslot(QTime start, QObject *parent) :
     QObject(parent), m_start(start), m_data("-"), m_hours(1)
@@ -21,6 +22,7 @@ void Timeslot::setItemData(const QString& data)
 {
     if (data != m_data) {
         m_data = data;
+        qDebug() << "Item data changed to: " << data;
         emit dataChanged();
     }
 }

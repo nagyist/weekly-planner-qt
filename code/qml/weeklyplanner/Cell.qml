@@ -11,50 +11,35 @@ Rectangle {
     height: 50*hourSpan
     border.color: "white"
     border.width: 2
-    //radius: 10
     z: hourSpan > 1 ? 10 : 1
-    color: hourSpan > 1 ? "#848484" : "#666666"
+    color: cellEdit.focus ? "#DDDDDD" : "#666666"
 
-    Text {
-        id: cellText
-
-        color: "white"
-        //font.bold: true
-        anchors.centerIn: parent
-        text: itemData + " for " + hourSpan + " hours"
-    }
-
-    TextEdit {
-        id: cellEdit
-        width: parent.width
-        height: parent.height
-        anchors.centerIn: parent
-        visible: false
-        text: itemData + " for " + hourSpan + " hours"
-    }
-
-    MouseArea {
-        anchors.fill: parent
-        // Todo, on clicked, show the tools!
-        onClicked: {
-            console.log("Clicked on: " + itemData)
-            tools.opacity = 1
-        }
+    function reset() {
+        console.log("Item " + itemData + " reset called!")
     }
 
     ToolsPopup {
         id: tools
 
+        opacity: cellEdit.focus ? 1 : 0
         anchors {
             bottom: parent.top
             left: parent.left
         }
+    }
 
-        onEdit: {
-            console.log("onEdit() signal captured!")
-            cellText.visible = false
-            cellEdit.visible = true
-            cellEdit.focus = true
+    TextEdit {
+        id: cellEdit
+
+        anchors.centerIn: parent
+        width: parent.width
+        height: parent.height
+        text: itemData + " for " + hourSpan + " hours"
+        color: focus ? "black" : "white"
+
+        onTextChanged: {
+            // TODO: CALL MODEL SETTEXT -FUNCTION!
+            setItemData(text);
         }
     }
 }
