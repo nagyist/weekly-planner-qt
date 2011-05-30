@@ -10,29 +10,35 @@ Timeslot::~Timeslot()
 {
 }
 
-void Timeslot::setStartTime(QTime& time)
+bool Timeslot::setStartTime(const QTime& time)
 {
     if (time != m_start) {
         m_start = time;
         emit dataChanged();
+        return true;
     }
+    return false;
 }
 
-void Timeslot::setItemData(const QString& data)
+bool Timeslot::setItemData(const QString& data)
 {
     if (data != m_data) {
         m_data = data;
         qDebug() << "Item data changed to: " << data;
         emit dataChanged();
+        return true;
     }
+    return false;
 }
 
-void Timeslot::setHourSpan(int hours)
+bool Timeslot::setHourSpan(int hours)
 {
     if (hours != m_hours) {
         m_hours = hours;
         emit dataChanged();
+        return true;
     }
+    return false;
 }
 
 QString Timeslot::startTime() const

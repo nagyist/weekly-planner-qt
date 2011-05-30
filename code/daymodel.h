@@ -16,7 +16,10 @@ public:
     enum Roles {
         StartTimeRole = Qt::UserRole+1,
         ItemDataRole,
-        HourSpanRole
+        HourSpanRole,
+        SetStartTimeRole,
+        SetItemDataRole,
+        SetHourSpanRole
       };
     static QHash<int, QByteArray> roleNames();
 public:
@@ -25,11 +28,11 @@ public:
 public: // From QAbstractListModel
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
-    QVariant headerData( int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
-    Qt::ItemFlags flags( const QModelIndex & index) const;
-    bool setData( const QModelIndex & index, const QVariant & value, int role = Qt::EditRole);
+    QVariant headerData( int section, Qt::Orientation orientation, int role = Qt::DisplayRole ) const;
+    Qt::ItemFlags flags( const QModelIndex & index ) const;
+    bool setData( const QModelIndex & index, const QVariant & value, int role = Qt::EditRole );
 public slots:
-    void setHourSpan(int index, int hourSpan);
+    bool setHourSpan(int index, int hourSpan);
 private:
     QString m_dayName;
     QList<Timeslot*> m_items;

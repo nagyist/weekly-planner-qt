@@ -15,9 +15,9 @@ public:
     Timeslot(QTime start, QObject *parent = 0);
     virtual ~Timeslot();
 
-    void setStartTime(QTime& time);
-    void setItemData(const QString& data);
-    void setHourSpan(int hours);
+    bool setStartTime(const QTime& time);
+    bool setItemData(const QString& data);
+    bool setHourSpan(int hours);
 
     QString startTime() const;
     QString itemData() const;

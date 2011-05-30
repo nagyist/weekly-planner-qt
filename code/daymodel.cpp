@@ -8,6 +8,9 @@ QHash<int, QByteArray> DayModel::roleNames()
     roles[StartTimeRole] = "startTime";
     roles[ItemDataRole] = "itemData";
     roles[HourSpanRole] = "hourSpan";
+    roles[SetStartTimeRole] = "setStartTime";
+    roles[SetItemDataRole] = "setItemData";
+    roles[SetHourSpanRole] = "setHourSpan";
     return roles;
 }
 
@@ -67,22 +70,54 @@ QVariant DayModel::headerData( int section, Qt::Orientation orientation, int rol
 
 Qt::ItemFlags DayModel::flags( const QModelIndex & index) const
 {
-    return Qt::ItemIsEnabled;
+    if (!index.isValid())
+        return 0;
+
+    return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsEditable;
 }
 
 // For editing
 bool DayModel::setData( const QModelIndex & index, const QVariant & value, int role)
 {
-    return true;
+    // TODO IMPLEMENT THIS!
+    qDebug() << "setData(), index" << index << "role" << role;
+
+    if (index.isValid()) {
+        int row = index.row();
+        if (row >= 0 && row < m_items.count()) {
+            Timeslot* slot = m_items[row];
+            if (role == SetStartTimeRole){
+                return slot->setStartTime(value.toTime());
+            } else if (role == SetItemDataRole) {
+                return slot->setItemData(value.toString());
+            } else if (role == SetHourSpanRole) {
+                return setHourSpan(row, value.toInt());
+            } else {
+                //return QVariant("ERR: Unknown role for daymodel");
+                return false;
+            }
+        } else {
+            //return QVariant("ERR: Invalid index");
+            return false;
+        }
+    } else {
+        //return QVariant("ERR: Invalid index");
+        return false;
+    }
+    //return QVariant("ERR: other");
+    return false;
 }
 
-void DayModel::setHourSpan(int index, int hourSpan)
+bool DayModel::setHourSpan(int index, int hourSpan)
 {
+    bool retVal = false;
     if (index >= 0 && index < m_items.count()) {
-        m_items[index]->setHourSpan(hourSpan);
-        // TODO remove hourSpan next items
+        retVal = m_items[index]->setHourSpan(hourSpan);
     }
 
-    for (int i = hourSpan-1; i > 0; i-- )
+    for (int i = hourSpan-1; i > 0; i-- ) {
         m_items.removeAt(index+i);
+    }
+
+    return retVal;
 }
