@@ -32,8 +32,9 @@ Item {
         preferredHighlightEnd: 200
         highlightRangeMode: ListView.StrictlyEnforceRange
         onCurrentIndexChanged: {
-            console.log("Current index changed. Current item x: " + currentItem.x);
-            var diffX = currentItem.x;
+            console.log("Current idx changed to " + currentIndex);
+            var days = [monday, tuesday, wednesday, thursday, friday, saturday, sunday];
+            viewSwitcher.switchView(days[currentIndex % days.length], currentIndex)
         }
     }
 
@@ -47,7 +48,6 @@ Item {
             border.width: 2
 
             color: "#666666"
-            //radius: 10
             Text {
                 color: "white"
                 anchors.centerIn: parent
@@ -61,10 +61,9 @@ Item {
                 anchors.fill: parent
                 onClicked: {
                     console.log("clicked " + dayName + " at " + index);
-
                     headerRow.currentIndex = index;
                     var days = [monday, tuesday, wednesday, thursday, friday, saturday, sunday];
-                    viewSwitcher.switchView(days[index], false)
+                    viewSwitcher.switchView(days[index % days.length], currentIndex)
                     container.selectedDay = index;
                 }
             }
@@ -106,7 +105,7 @@ Item {
             id: viewSwitcher
             // Rooted in contentPane
             root: contentPane
-            currentView: page1
+            currentView: monday
         }
 
         PivotPage {

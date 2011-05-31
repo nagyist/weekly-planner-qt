@@ -1,6 +1,6 @@
 /**
- * The view framework for loading and switching views is borrowed from the
- * blog article by Juha Turunen.
+ * The view framework for loading and switching views is borrowed and modified
+ * from the blog article by Juha Turunen.
  *
  * See http://juhaturunen.com/blog/
  */
@@ -10,6 +10,7 @@ QtObject {
     id: container
     property Item currentView
     property Item previousView
+    property int previousIndex: 0
 
     property Item root
 
@@ -17,16 +18,19 @@ QtObject {
     property bool running: switchAnimation.running
     property bool direction
 
-    function switchView(newView, leftToRight, instant) {
+    function switchView(newView, index, instant) {
         if (newView != currentView && !switchAnimation.running) {
             // if the new view has a loadView() function, call it to make sure the view is loaded
             if (newView.loadView != undefined)
                 newView.loadView();
 
+            var leftToRight = index < previousIndex ? true : false;
+            console.log("Index: " + index + " previousIndex: " + previousIndex + " leftToRight: " + leftToRight );
             newView.x = leftToRight ? -root.width : root.width
             direction = leftToRight;
             previousView = currentView;
             currentView = newView;
+            previousIndex = index;
             newView.opacity = 1;
             switchAnimation.start();
             if (instant) {
