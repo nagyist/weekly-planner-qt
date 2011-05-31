@@ -133,7 +133,6 @@ Item {
                 top: parent.top
                 bottom: parent.bottom
             }
-            color: "red"
             width: parent.width
             opacity: 1
             model: week.day(0).items()
@@ -145,7 +144,6 @@ Item {
                 top: parent.top
                 bottom: parent.bottom
             }
-            color: "green"
             width: parent.width
             opacity: 0
             model: week.day(1).items()
@@ -156,7 +154,6 @@ Item {
                 top: parent.top
                 bottom: parent.bottom
             }
-            color: "blue"
             width: parent.width
             opacity: 0
             model: week.day(2).items()
@@ -167,7 +164,6 @@ Item {
                 top: parent.top
                 bottom: parent.bottom
             }
-            color: "orange"
             width: parent.width
             opacity: 0
             model: week.day(3).items()
@@ -178,7 +174,6 @@ Item {
                 top: parent.top
                 bottom: parent.bottom
             }
-            color: "steelblue"
             width: parent.width
             opacity: 0
             model: week.day(4).items()
@@ -189,7 +184,6 @@ Item {
                 top: parent.top
                 bottom: parent.bottom
             }
-            color: "lightsteelblue"
             width: parent.width
             opacity: 0
             model: week.day(5).items()
@@ -200,7 +194,6 @@ Item {
                 top: parent.top
                 bottom: parent.bottom
             }
-            color: "darkgray"
             width: parent.width
             opacity: 0
             model: week.day(6).items()

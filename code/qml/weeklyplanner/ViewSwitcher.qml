@@ -25,7 +25,6 @@ QtObject {
                 newView.loadView();
 
             var leftToRight = index < previousIndex ? true : false;
-            console.log("Index: " + index + " previousIndex: " + previousIndex + " leftToRight: " + leftToRight );
             newView.x = leftToRight ? -root.width : root.width
             direction = leftToRight;
             previousView = currentView;
