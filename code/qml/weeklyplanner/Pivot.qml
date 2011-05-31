@@ -21,10 +21,20 @@ Item {
             right: parent.right
             top: parent.top
         }
+        cacheBuffer: 7
         height: 60
         model: week
         delegate: pivotHeaderDelegate
         orientation: ListView.Horizontal
+        snapMode: ListView.SnapToItem
+        highlightFollowsCurrentItem: true
+        preferredHighlightBegin: 0
+        preferredHighlightEnd: 200
+        highlightRangeMode: ListView.StrictlyEnforceRange
+        onCurrentIndexChanged: {
+            console.log("Current index changed. Current item x: " + currentItem.x);
+            var diffX = currentItem.x;
+        }
     }
 
     Component {
@@ -51,55 +61,143 @@ Item {
                 anchors.fill: parent
                 onClicked: {
                     console.log("clicked " + dayName + " at " + index);
+
                     headerRow.currentIndex = index;
                     var days = [monday, tuesday, wednesday, thursday, friday, saturday, sunday];
-                    viewSwitcher.switchView(days[index], index)
+                    viewSwitcher.switchView(days[index], false)
                     container.selectedDay = index;
                 }
             }
         }
     }
 
-    // Content pane
-    Table {
-        id: contentPane
-        width: container.width
-        height: container.height
-
-        model: week
-        numberOfColumnsToShow: container.landscape ? 2 : 1
-
-        anchors {
-            top: headerRow.bottom
-            left: parent.left
-            right: parent.right
-            bottom: parent.bottom
-        }
-
-        onModelChanged: {
-            console.log("Tablemodel changed");
-        }
-    }
-
-/*
     Flickable {
         id: contentPane
 
-        width: parent.width
-        height: parent.height
-        clip: true
-
+        Component.onCompleted: console.log("contentPane loaded");
         anchors {
             top: headerRow.bottom
+            bottom: parent.bottom
             left: parent.left
             right: parent.right
-            bottom: parent.bottom
         }
-        contentWidth: hourColumn.width + monday.width*7
-        contentHeight: hourColumn.height + monday.height
-        flickableDirection: Flickable.VerticalFlick
+        contentWidth: width*1.5
+        flickableDirection: Flickable.HorizontalFlick
+        clip: true
 
-        HourColumn {
+        onFlickableDirectionChanged: {
+            console.log("onFlickableDirectionChanged");
+        }
+
+        onFlickingChanged: {
+            console.log("onFlickingChanged");
+        }
+
+        onFlickStarted: {
+            console.log("onFlickStarted");
+        }
+
+        onFlickEnded: {
+            console.log("onFlickEnded");
+        }
+
+        // View switcher component, handles the view switching and animation
+        ViewSwitcher {
+            id: viewSwitcher
+            // Rooted in contentPane
+            root: contentPane
+            currentView: page1
+        }
+
+        PivotPage {
+            id: monday
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+                topMargin: 10
+                bottomMargin: 10
+            }
+            color: "red"
+            width: parent.width
+            opacity: 1
+        }
+
+        PivotPage {
+            id: tuesday
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+                topMargin: 10
+                bottomMargin: 10
+            }
+            color: "green"
+            width: parent.width
+            opacity: 0
+        }
+        PivotPage {
+            id: wednesday
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+                topMargin: 10
+                bottomMargin: 10
+            }
+            color: "blue"
+            width: parent.width
+            opacity: 0
+        }
+        PivotPage {
+            id: thursday
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+                topMargin: 10
+                bottomMargin: 10
+            }
+            color: "orange"
+            width: parent.width
+            opacity: 0
+        }
+        PivotPage {
+            id: friday
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+                topMargin: 10
+                bottomMargin: 10
+            }
+            color: "steelblue"
+            width: parent.width
+            opacity: 0
+        }
+        PivotPage {
+            id: saturday
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+                topMargin: 10
+                bottomMargin: 10
+            }
+            color: "lightsteelblue"
+            width: parent.width
+            opacity: 0
+        }
+        PivotPage {
+            id: sunday
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+                topMargin: 10
+                bottomMargin: 10
+            }
+            color: "darkgray"
+            width: parent.width
+            opacity: 0
+        }
+    }
+}
+
+/*        HourColumn {
             id: hourColumn
 
             anchors {
@@ -108,8 +206,11 @@ Item {
                 bottom: parent.bottom
                 margins: 10
             }
+            width: contentPane.hourColumnWidth
         }
+*/
 
+/*
         // The actual views (in a row)
         Row {
             id: dayRow
@@ -159,40 +260,5 @@ Item {
                 model: week.day(6).items()
             }
         }
+        */
 
-        // View switcher component, handles the view switching and animation
-        ViewSwitcher {
-            id: viewSwitcher
-            // Rooted in contentPane
-            root: contentPane
-        }
-
-        GestureArea {
-            anchors.fill: parent
-            focus: true
-
-            onTap: {
-                console.log("tap pos = (",gesture.position.x,",",gesture.position.y,")")
-                if ( gesture.position.x < 320 ) {
-
-                }
-            }
-            onTapAndHold: {
-                console.log("tap and hold pos = (",gesture.position.x,",",gesture.position.y,")")
-
-            }
-
-            // These are not working!
-//            onPan: {
-//                console.log("pan delta = (",gesture.delta.x,",",gesture.delta.y,") acceleration = ",gesture.acceleration);
-//            }
-//            onSwipe: {
-//                console.log("swipe angle=",gesture.swipeAngle);
-//            }
-//            onGesture: {
-//                console.log("gesture hot spot = (",gesture.hotSpot.x,",",gesture.hotSpot.y,")");
-//            }
-        }
-    }
-*/
-}

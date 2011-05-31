@@ -52,7 +52,7 @@ QVariant DayModel::data(const QModelIndex &index, int role) const
             } else if (role == HourSpanRole) {
                 return QVariant(slot->hourSpan());
             } else {
-                return QVariant("ERR: Unknown role for daymodel");
+                return QVariant("ERR: Unknown role for daymodel: " + role);
             }
         } else {
             return QVariant("ERR: Invalid index");

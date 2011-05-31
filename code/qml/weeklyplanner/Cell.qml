@@ -40,7 +40,7 @@ Rectangle {
         onTextChanged: {
             console.log("Text changed, setting new text to model");
             // TODO: CALL MODEL SETTEXT -FUNCTION!
-            setItemData(cellEdit.text);
+            //setItemData(cellEdit.text);
         }
     }
 }
