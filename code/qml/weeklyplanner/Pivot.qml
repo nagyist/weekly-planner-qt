@@ -136,6 +136,7 @@ Item {
             color: "red"
             width: parent.width
             opacity: 1
+            model: week.day(0).items()
         }
 
         PivotPage {
@@ -147,6 +148,7 @@ Item {
             color: "green"
             width: parent.width
             opacity: 0
+            model: week.day(1).items()
         }
         PivotPage {
             id: wednesday
@@ -157,6 +159,7 @@ Item {
             color: "blue"
             width: parent.width
             opacity: 0
+            model: week.day(2).items()
         }
         PivotPage {
             id: thursday
@@ -167,6 +170,7 @@ Item {
             color: "orange"
             width: parent.width
             opacity: 0
+            model: week.day(3).items()
         }
         PivotPage {
             id: friday
@@ -177,6 +181,7 @@ Item {
             color: "steelblue"
             width: parent.width
             opacity: 0
+            model: week.day(4).items()
         }
         PivotPage {
             id: saturday
@@ -187,6 +192,7 @@ Item {
             color: "lightsteelblue"
             width: parent.width
             opacity: 0
+            model: week.day(5).items()
         }
         PivotPage {
             id: sunday
@@ -197,72 +203,7 @@ Item {
             color: "darkgray"
             width: parent.width
             opacity: 0
+            model: week.day(6).items()
         }
     }
 }
-
-/*        HourColumn {
-            id: hourColumn
-
-            anchors {
-                left: parent.left
-                top: parent.top
-                bottom: parent.bottom
-                margins: 10
-            }
-            width: contentPane.hourColumnWidth
-        }
-*/
-
-/*
-        // The actual views (in a row)
-        Row {
-            id: dayRow
-            anchors {
-                left: hourColumn.right
-                top: parent.top
-                bottom: parent.bottom
-            }
-
-            property int numberOfColumnsToShow: container.landscape ? 2 : 1
-            property int dayWidth: numberOfColumnsToShow == 1 ? container.width - hourColumn.width - 30 : (container.width - hourColumn.width - 40)/2;
-
-            Day {
-                id: monday
-                width: dayRow.dayWidth
-                model: week.day(0).items()
-                //numberOfColumnsToShow: container.landscape ? 2 : 1
-            }
-            Day {
-                id: tuesday
-                width: dayRow.dayWidth
-                model: week.day(1).items()
-            }
-            Day {
-                id: wednesday
-                width: dayRow.dayWidth
-                model: week.day(2).items()
-            }
-            Day {
-                id: thursday
-                width: dayRow.dayWidth
-                model: week.day(3).items()
-            }
-            Day {
-                id: friday
-                width: dayRow.dayWidth
-                model: week.day(4).items()
-            }
-            Day {
-                id: saturday
-                width: dayRow.dayWidth
-                model: week.day(5).items()
-            }
-            Day {
-                id: sunday
-                width: dayRow.dayWidth
-                model: week.day(6).items()
-            }
-        }
-        */
-
