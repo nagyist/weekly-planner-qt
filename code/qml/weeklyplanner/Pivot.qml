@@ -7,6 +7,7 @@ Item {
     width: 360
     height: 640
 
+    property variant model: null
     property bool landscape: container.width > container.height
     property int selectedDay: 0
     property int contentY: 0
@@ -63,10 +64,24 @@ Item {
                     console.log("clicked " + dayName + " at " + index);
                     headerRow.currentIndex = index;
                     var days = [monday, tuesday, wednesday, thursday, friday, saturday, sunday];
-                    viewSwitcher.switchView(days[index % days.length], currentIndex)
+                    viewSwitcher.switchView(days[index % days.length], false)
                     container.selectedDay = index;
                 }
             }
+        }
+    }
+
+    HourColumn {
+        id: hourColumn
+
+        anchors {
+            left: parent.left
+            top: headerRow.bottom
+            bottom: parent.bottom
+            leftMargin: 10
+            rightMargin: 10
+            topMargin: 10
+            bottomMargin: 10
         }
     }
 
@@ -77,8 +92,12 @@ Item {
         anchors {
             top: headerRow.bottom
             bottom: parent.bottom
-            left: parent.left
+            left: hourColumn.right
             right: parent.right
+            topMargin: 10
+            bottomMargin: 10
+            leftMargin: 10
+            rightMargin: 10
         }
         contentWidth: width*1.5
         flickableDirection: Flickable.HorizontalFlick
@@ -113,8 +132,6 @@ Item {
             anchors {
                 top: parent.top
                 bottom: parent.bottom
-                topMargin: 10
-                bottomMargin: 10
             }
             color: "red"
             width: parent.width
@@ -126,8 +143,6 @@ Item {
             anchors {
                 top: parent.top
                 bottom: parent.bottom
-                topMargin: 10
-                bottomMargin: 10
             }
             color: "green"
             width: parent.width
@@ -138,8 +153,6 @@ Item {
             anchors {
                 top: parent.top
                 bottom: parent.bottom
-                topMargin: 10
-                bottomMargin: 10
             }
             color: "blue"
             width: parent.width
@@ -150,8 +163,6 @@ Item {
             anchors {
                 top: parent.top
                 bottom: parent.bottom
-                topMargin: 10
-                bottomMargin: 10
             }
             color: "orange"
             width: parent.width
@@ -162,8 +173,6 @@ Item {
             anchors {
                 top: parent.top
                 bottom: parent.bottom
-                topMargin: 10
-                bottomMargin: 10
             }
             color: "steelblue"
             width: parent.width
@@ -174,8 +183,6 @@ Item {
             anchors {
                 top: parent.top
                 bottom: parent.bottom
-                topMargin: 10
-                bottomMargin: 10
             }
             color: "lightsteelblue"
             width: parent.width
@@ -186,8 +193,6 @@ Item {
             anchors {
                 top: parent.top
                 bottom: parent.bottom
-                topMargin: 10
-                bottomMargin: 10
             }
             color: "darkgray"
             width: parent.width
