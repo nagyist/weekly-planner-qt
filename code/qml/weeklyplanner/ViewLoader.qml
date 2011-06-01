@@ -10,17 +10,21 @@ Loader {
     opacity: 0
 
     function activationComplete() {
-        if (typeof item.activationComplete != 'undefined') item.activationComplete();
+        if (typeof item.activationComplete != 'undefined') {
+            item.activationComplete();
+        }
     }
 
     function deactivationComplete() {
         if (typeof item.deactivationComplete != 'undefined') item.deactivationComplete();
-        if (!keepLoaded)
+        if (!keepLoaded) {
             source = "";
+        }
     }
 
     function loadView() {
-        if (status != Loader.Ready)
+        if (status != Loader.Ready) {
             source = viewSource;
+        }
     }
 }

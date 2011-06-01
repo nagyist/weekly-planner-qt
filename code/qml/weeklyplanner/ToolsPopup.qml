@@ -22,27 +22,6 @@ Rectangle {
         width: parent.width
         height: parent.height
 
-//        // Three buttons
-//        // NOTE: NO NEED FOR SEPARATE EDIT-BUTTON?
-//        Button {
-//            buttonName: "editButton"
-//            bgImage: "gfx/info.png"
-//            bgImagePressed: "gfx/info.png"
-//            anchors.verticalCenter: parent.verticalCenter
-
-//            width: 49
-//            height: 49
-//            opacity: 0.8
-
-//            onClicked: {
-//                console.log("EditButton onClicked");
-//                // Leave the toolbar visible, when entering edit mode
-//                // TODO: Implement the edit mode!
-//                hideTimer.stop()
-//                edit();
-//            }
-//        }
-
         // Buttons for copying and pasting the cell content
         Button {
             buttonName: "copyButton"
@@ -79,15 +58,15 @@ Rectangle {
         }
     }
 
-//    Timer {
-//        id: hideTimer
-//        interval: toolsPopup.timeout
-//        running: toolsPopup.opacity > 0 ? true : false
-//        repeat: false
-//        onTriggered: {
-//            toolsPopup.opacity = 0
-//        }
-//    }
+    //    Timer {
+    //        id: hideTimer
+    //        interval: toolsPopup.timeout
+    //        running: toolsPopup.opacity > 0 ? true : false
+    //        repeat: false
+    //        onTriggered: {
+    //            toolsPopup.opacity = 0
+    //        }
+    //    }
 
     Behavior on opacity {
         NumberAnimation {
