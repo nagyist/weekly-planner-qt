@@ -15,7 +15,6 @@ Rectangle {
 
     signal copy()
     signal paste()
-    //signal edit()
 
     Row {
         spacing: 2

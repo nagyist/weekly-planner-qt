@@ -1,18 +1,22 @@
 import QtQuick 1.0
 import Qt.labs.gestures 1.0
 
-Item {
+Rectangle {
     id: container
 
     width: 360
     height: 640
+    color: "green"
 
     property variant model: null
     property int headerHeight: 80
     property int headerItemWidth: 200
-    property color backgroundColor: "#666666"
+    property color backgroundColor: "gray"
+    property color backgroundColorFocus: "lightGray"
     property color borderColor: "white"
     property color textColor: "white"
+    property color textColorFocus: "red"
+    property color headerTextColor: "white"
 
     // Internal properties, don't set from outside
     property bool landscape: container.width > container.height
@@ -56,7 +60,7 @@ Item {
 
             color: container.backgroundColor
             Text {
-                color: container.textColor
+                color: container.headerTextColor
                 anchors.centerIn: parent
                 text: dayName
                 font {
@@ -89,6 +93,9 @@ Item {
             topMargin: 10
             bottomMargin: 10
         }
+        textColor: container.textColor
+        backgroundColor: container.backgroundColor
+        borderColor: container.borderColor
     }
 
     Flickable {
@@ -101,7 +108,6 @@ Item {
             left: hourColumn.right
             right: parent.right
             topMargin: 10
-            bottomMargin: 10
             leftMargin: 10
             rightMargin: 10
         }
@@ -142,6 +148,11 @@ Item {
             width: parent.width
             opacity: 1
             model: week.day(0).items()
+            textColor: container.textColor
+            textColorFocus: container.textColorFocus
+            backgroundColor: container.backgroundColor
+            backgroundColorFocus: container.backgroundColorFocus
+            borderColor: container.borderColor
         }
 
         PivotPage {
@@ -153,7 +164,13 @@ Item {
             width: parent.width
             opacity: 0
             model: week.day(1).items()
+            textColor: container.textColor
+            textColorFocus: container.textColorFocus
+            backgroundColor: container.backgroundColor
+            backgroundColorFocus: container.backgroundColorFocus
+            borderColor: container.borderColor
         }
+
         PivotPage {
             id: wednesday
             anchors {
@@ -163,7 +180,13 @@ Item {
             width: parent.width
             opacity: 0
             model: week.day(2).items()
+            textColor: container.textColor
+            textColorFocus: container.textColorFocus
+            backgroundColor: container.backgroundColor
+            backgroundColorFocus: container.backgroundColorFocus
+            borderColor: container.borderColor
         }
+
         PivotPage {
             id: thursday
             anchors {
@@ -173,7 +196,13 @@ Item {
             width: parent.width
             opacity: 0
             model: week.day(3).items()
+            textColor: container.textColor
+            textColorFocus: container.textColorFocus
+            backgroundColor: container.backgroundColor
+            backgroundColorFocus: container.backgroundColorFocus
+            borderColor: container.borderColor
         }
+
         PivotPage {
             id: friday
             anchors {
@@ -183,7 +212,13 @@ Item {
             width: parent.width
             opacity: 0
             model: week.day(4).items()
+            textColor: container.textColor
+            textColorFocus: container.textColorFocus
+            backgroundColor: container.backgroundColor
+            backgroundColorFocus: container.backgroundColorFocus
+            borderColor: container.borderColor
         }
+
         PivotPage {
             id: saturday
             anchors {
@@ -193,7 +228,13 @@ Item {
             width: parent.width
             opacity: 0
             model: week.day(5).items()
+            textColor: container.textColor
+            textColorFocus: container.textColorFocus
+            backgroundColor: container.backgroundColor
+            backgroundColorFocus: container.backgroundColorFocus
+            borderColor: container.borderColor
         }
+
         PivotPage {
             id: sunday
             anchors {
@@ -203,6 +244,11 @@ Item {
             width: parent.width
             opacity: 0
             model: week.day(6).items()
+            textColor: container.textColor
+            textColorFocus: container.textColorFocus
+            backgroundColor: container.backgroundColor
+            backgroundColorFocus: container.backgroundColorFocus
+            borderColor: container.borderColor
         }
     }
 }

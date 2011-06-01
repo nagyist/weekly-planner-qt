@@ -27,7 +27,8 @@ SOURCES += main.cpp \
     weekmodel.cpp \
     timeslot.cpp \
     day.cpp \
-    daymodel.cpp
+    daymodel.cpp \
+    tablecell.cpp
 
 # Please do not modify the following two lines. Required for deployment.
 include(qmlapplicationviewer/qmlapplicationviewer.pri)
@@ -37,4 +38,5 @@ HEADERS += \
     weekmodel.h \
     timeslot.h \
     day.h \
-    daymodel.h
+    daymodel.h \
+    tablecell.h

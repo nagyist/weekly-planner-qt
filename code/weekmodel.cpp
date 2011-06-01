@@ -82,3 +82,4 @@ QObject* WeekModel::day(int index) const
     }
     return 0;
 }
+

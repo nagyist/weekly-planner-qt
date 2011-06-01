@@ -3,6 +3,7 @@ import QtQuick 1.0
 Rectangle {
     id: container
 
+    property int itemHeight: 50
     property color textColor: "white"
     property color textColorFocus: "black"
     property color backgroundColor: "#666666"
@@ -14,7 +15,7 @@ Rectangle {
 
 
     width: parent.width
-    height: 50*hourSpan
+    height: hourSpan * container.itemHeight
     border.color: container.borderColor
     border.width: 2
     z: hourSpan > 1 ? 10 : 1

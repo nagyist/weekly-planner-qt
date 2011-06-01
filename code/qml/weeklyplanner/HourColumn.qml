@@ -3,6 +3,11 @@ import QtQuick 1.0
 ListView {
     id: hourColumn
 
+    property int itemHeight: 80
+    property color backgroundColor: "gray"
+    property color borderColor: "white"
+    property color textColor: "white"
+
     Component.onCompleted: {
         console.log("HourColumn size: (" + hourColumn.width + "," + hourColumn.height + ")");
     }
@@ -27,14 +32,13 @@ ListView {
             }
 
             width: parent.width
-            height: 50
-            border.color: "white"
+            height: hourColumn.itemHeight
+            border.color: hourColumn.borderColor
             border.width: 2
-            //radius: 10
-            color: "#666666"
+            color: hourColumn.backgroundColor
 
             Text {
-                color: "white"
+                color: hourColumn.textColor
                 //font.bold: true
                 anchors.centerIn: parent
                 text: startTime
