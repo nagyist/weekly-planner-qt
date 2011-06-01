@@ -3,16 +3,19 @@ import QtQuick 1.0
 Rectangle {
     id: cellDelegate
 
+    property color backgroundColor: "#666666"
+    property color backgroundColorFocus: "#DDDDDD"
     Component.onCompleted: {
         //console.log("Component " + itemData + " created on QML side!")
     }
+
 
     width: parent.width
     height: 50*hourSpan
     border.color: "white"
     border.width: 2
     z: hourSpan > 1 ? 10 : 1
-    color: cellEdit.focus ? "#DDDDDD" : "#666666"
+    color: cellEdit.focus ? backgroundColorFocus : backgroundColor
 
     function reset() {
         console.log("Item " + itemData + " reset called!")

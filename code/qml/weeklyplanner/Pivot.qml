@@ -10,6 +10,9 @@ Item {
     property variant model: null
     property int headerHeight: 80
     property int headerItemWidth: 200
+    property color backgroundColor: "#666666"
+    property color borderColor: "white"
+    property color textColor: "white"
 
     // Internal properties, don't set from outside
     property bool landscape: container.width > container.height
@@ -48,12 +51,12 @@ Item {
         Rectangle {
             height: parent.height
             width: container.headerItemWidth
-            border.color: "white"
+            border.color: container.borderColor
             border.width: 2
 
-            color: "#666666"
+            color: container.backgroundColor
             Text {
-                color: "white"
+                color: container.textColor
                 anchors.centerIn: parent
                 text: dayName
                 font {
