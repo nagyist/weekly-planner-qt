@@ -3,6 +3,8 @@ import QtQuick 1.0
 Rectangle {
     id: toolsPopup
 
+    signal clicked
+
     width: 102
     height: 56
     color: "gray"
@@ -55,6 +57,7 @@ Rectangle {
             onClicked: {
                 console.log("copyButton onClicked");
                 copy();
+                toolsPopup.clicked();
             }
         }
 
@@ -71,6 +74,7 @@ Rectangle {
             onClicked: {
                 console.log("pasteButton onClicked");
                 paste();
+                toolsPopup.clicked();
             }
         }
     }

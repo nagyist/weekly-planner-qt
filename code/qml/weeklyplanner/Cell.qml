@@ -3,6 +3,8 @@ import QtQuick 1.0
 Rectangle {
     id: cellDelegate
 
+    property color textColor: "white"
+    property color textColorFocus: "black"
     property color backgroundColor: "#666666"
     property color backgroundColorFocus: "#DDDDDD"
     Component.onCompleted: {
@@ -29,6 +31,7 @@ Rectangle {
             bottom: parent.top
             left: parent.left
         }
+        onClicked: cellEdit.focus = false;
     }
 
     TextEdit {
@@ -38,7 +41,7 @@ Rectangle {
         width: parent.width
         height: parent.height
         text: itemData + " for " + hourSpan + " hours"
-        color: focus ? "black" : "white"
+        color: focus ? container.textColorFocus : container.textColor
 
         onTextChanged: {
             //console.log("Text changed, setting new text to model");
