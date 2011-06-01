@@ -13,9 +13,16 @@ Item {
 
         anchors.fill: parent
         model: dayContainer.model
-        delegate: Cell{}
+        delegate: Cell {}
         snapMode: ListView.SnapToItem
-        interactive: false
+        interactive: true
+        onFlickEnded: {
+            console.log("flick ended");
+        }
+
+        onCurrentIndexChanged: {
+            console.log("IDX: " + currentIndex);
+        }
     }
 
 }

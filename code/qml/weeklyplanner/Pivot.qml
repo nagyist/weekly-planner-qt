@@ -8,6 +8,10 @@ Item {
     height: 640
 
     property variant model: null
+    property int headerHeight: 80
+    property int headerItemWidth: 200
+
+    // Internal properties, don't set from outside
     property bool landscape: container.width > container.height
     property int selectedDay: 0
     property int contentY: 0
@@ -16,21 +20,20 @@ Item {
     ListView {
         id: headerRow
 
-        property int pivotHeaderWidth: 200
         anchors {
             left: parent.left
             right: parent.right
             top: parent.top
         }
         cacheBuffer: 7
-        height: 60
+        height: container.headerHeight
         model: week
         delegate: pivotHeaderDelegate
         orientation: ListView.Horizontal
         snapMode: ListView.SnapToItem
         highlightFollowsCurrentItem: true
         preferredHighlightBegin: 0
-        preferredHighlightEnd: 200
+        preferredHighlightEnd: container.headerItemWidth
         highlightRangeMode: ListView.StrictlyEnforceRange
         onCurrentIndexChanged: {
             console.log("Current idx changed to " + currentIndex);
@@ -44,7 +47,7 @@ Item {
 
         Rectangle {
             height: parent.height
-            width: headerRow.pivotHeaderWidth
+            width: container.headerItemWidth
             border.color: "white"
             border.width: 2
 

@@ -6,16 +6,16 @@ Item {
     property string buttonName: ""
     property string text: ""
 
-    property string fontName: "Helvetica"
+    property string fontName: ""
     property int fontSize: 12
     property color fontColor: "black"
     property bool fontBold: false
 
     property bool active: false
 
-    property string bgImage: 'gfx/button.png';
-    property string bgImagePressed: 'gfx/button_pressed.png';
-    property string bgImageActive: 'gfx/button_active.png';
+    property string bgImage: 'gfx/exitbutton_icon.png';
+    property string bgImagePressed: 'gfx/exitbutton_icon_pressed.png';
+    property string bgImageActive: '';
 
     signal clicked(string button)
 

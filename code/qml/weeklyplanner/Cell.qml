@@ -4,7 +4,7 @@ Rectangle {
     id: cellDelegate
 
     Component.onCompleted: {
-        console.log("Component " + itemData + " created on QML side!")
+        //console.log("Component " + itemData + " created on QML side!")
     }
 
     width: parent.width
@@ -38,7 +38,7 @@ Rectangle {
         color: focus ? "black" : "white"
 
         onTextChanged: {
-            console.log("Text changed, setting new text to model");
+            //console.log("Text changed, setting new text to model");
             // TODO: CALL MODEL SETTEXT -FUNCTION!
             //setItemData(cellEdit.text);
         }
