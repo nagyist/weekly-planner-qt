@@ -10,7 +10,7 @@ Rectangle {
 
     property variant model: null
     property int headerHeight: 80
-    property int headerItemWidth: 200
+    property int headerItemWidth: 180
     property color backgroundColor: "gray"
     property color backgroundColorFocus: "lightGray"
     property color borderColor: "white"
@@ -153,6 +153,8 @@ Rectangle {
             backgroundColor: container.backgroundColor
             backgroundColorFocus: container.backgroundColorFocus
             borderColor: container.borderColor
+
+            onIndexChanged: console.log("MONDAY IDX CHANGED:" + index);
         }
 
         PivotPage {

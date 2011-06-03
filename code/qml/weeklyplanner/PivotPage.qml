@@ -2,7 +2,9 @@ import QtQuick 1.0
 import Templates 1.0
 
 Item {
-    id: dayContainer
+    id: container
+
+    signal indexChanged(int index);
 
     property int itemHeight: 80
     property color textColor: "white"
@@ -10,7 +12,6 @@ Item {
     property color backgroundColor: "#666666"
     property color backgroundColorFocus: "#DDDDDD"
     property color borderColor: "white"
-
     property variant model: null
 
     width: 360
@@ -20,14 +21,14 @@ Item {
         id: weekDay
 
         anchors.fill: parent
-        model: dayContainer.model
+        model: container.model
         delegate: Cell {
-            itemHeight: dayContainer.itemHeight
-            textColor: dayContainer.textColor
-            textColorFocus: dayContainer.textColorFocus
-            backgroundColor: dayContainer.backgroundColor
-            backgroundColorFocus: dayContainer.backgroundColorFocus
-            borderColor: dayContainer.borderColor
+            itemHeight: container.itemHeight
+            textColor: container.textColor
+            textColorFocus: container.textColorFocus
+            backgroundColor: container.backgroundColor
+            backgroundColorFocus: container.backgroundColorFocus
+            borderColor: container.borderColor
         }
         snapMode: ListView.SnapToItem
         interactive: true
@@ -36,6 +37,7 @@ Item {
         }
 
         onCurrentIndexChanged: {
+            container.indexChanged(currentIndex);
             console.log("IDX: " + currentIndex);
         }
     }

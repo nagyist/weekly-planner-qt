@@ -9,10 +9,6 @@ Rectangle {
     property color backgroundColor: "#666666"
     property color backgroundColorFocus: "#DDDDDD"
     property color borderColor: "white"
-    Component.onCompleted: {
-        //console.log("Component " + itemData + " created on QML side!")
-    }
-
 
     width: parent.width
     height: hourSpan * container.itemHeight
@@ -32,6 +28,7 @@ Rectangle {
         anchors {
             bottom: parent.top
             left: parent.left
+            margins: 2
         }
         onClicked: cellEdit.focus = false;
     }

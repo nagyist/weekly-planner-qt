@@ -1,23 +1,33 @@
 import QtQuick 1.0
 
 Rectangle {
-    id: toolsPopup
+    id: container
 
     signal clicked
-
-    width: 102
-    height: 56
-    color: "gray"
-    // Hidden by default
-    opacity: 0
-    // Defines, how long shall the popup be visible (in ms)
-    property int timeout: 2000
-
     signal copy()
     signal paste()
 
+    property color backgroundColor: "gray"
+    property color borderColor: "black"
+    property int borderWidth: 2
+    property int iconSpacing: 5
+
+    // Defines, how long shall the popup be visible (in ms)
+    property int timeout: 2000
+
+    width: 102
+    height: 56
+    color: backgroundColor
+    // Hidden by default
+    opacity: 0
+    border {
+        width: container.borderWidth
+        color: container.borderColor
+    }
+
+
     Row {
-        spacing: 2
+        spacing: container.iconSpacing
         width: parent.width
         height: parent.height
 
@@ -35,7 +45,7 @@ Rectangle {
             onClicked: {
                 console.log("copyButton onClicked");
                 copy();
-                toolsPopup.clicked();
+                container.clicked();
             }
         }
 
@@ -52,7 +62,7 @@ Rectangle {
             onClicked: {
                 console.log("pasteButton onClicked");
                 paste();
-                toolsPopup.clicked();
+                container.clicked();
             }
         }
     }
