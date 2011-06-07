@@ -22,21 +22,19 @@ symbian:TARGET.UID3 = 0xE097921D
 # CONFIG += mobility
 # MOBILITY +=
 
-# The .cpp file which was generated for your project. Feel free to hack it.
+HEADERS += \
+    weekmodel.h \
+    timeslot.h \
+    day.h \
+    daymodel.h
+
 SOURCES += main.cpp \
     weekmodel.cpp \
     timeslot.cpp \
     day.cpp \
-    daymodel.cpp \
-    tablecell.cpp
+    daymodel.cpp
 
 # Please do not modify the following two lines. Required for deployment.
 include(qmlapplicationviewer/qmlapplicationviewer.pri)
 qtcAddDeployment()
 
-HEADERS += \
-    weekmodel.h \
-    timeslot.h \
-    day.h \
-    daymodel.h \
-    tablecell.h

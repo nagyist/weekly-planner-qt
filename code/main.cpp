@@ -3,7 +3,6 @@
 #include <QtDeclarative/QDeclarativeContext>
 #include "qmlapplicationviewer.h"
 #include "weekmodel.h"
-#include "tablecell.h"
 
 int main(int argc, char *argv[])
 {
@@ -11,8 +10,6 @@ int main(int argc, char *argv[])
 
     QmlApplicationViewer viewer;
     QDeclarativeContext* ctx = viewer.rootContext();
-
-    qmlRegisterType<TableCell>("Templates", 1, 0, "TableCell");
 
     QScopedPointer<WeekModel> week(new WeekModel());
     ctx->setContextProperty("week", week.data());
