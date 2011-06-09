@@ -14,6 +14,8 @@ Item {
     property color backgroundColor: "gray"
     property color headerTextColor: "white"
 
+    signal indexChanged(int index)
+
     Component {
         id: pivotHeaderDelegate
 
@@ -36,14 +38,9 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    console.log("clicked " + dayName + " at " + index);
-                    if (pathView.currentIndex == index) {
-                        contentPane.currentIndex = index;
-                        headerRow.currentIndex = index;
-                    } else {
-                        console.log("focusing clicked index: " + index)
-                        pathView.currentIndex = index;
-                        contentPane.currentIndex = index;
+                    if (pathView.currentIndex != index) {
+                        console.log("Focusing on " + dayName +
+                                    ". Clicked index was: " + index)
                         headerRow.currentIndex = index;
                     }
                 }
@@ -60,10 +57,10 @@ Item {
         anchors.fill: parent
         preferredHighlightBegin: 0.3333
         preferredHighlightEnd: 0.3333
+        currentIndex: headerRow.currentIndex
         onCurrentIndexChanged: {
             console.log("CurrentIndexChanged: " + pathView.currentIndex)
-            contentPane.currentIndex = pathView.currentIndex;
-            headerRow.currentIndex = pathView.currentIndex;
+            headerRow.indexChanged(pathView.currentIndex)
         }
 
         path: Path {
