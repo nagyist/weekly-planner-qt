@@ -19,7 +19,7 @@ Rectangle {
 
     // Internal properties, don't set from outside
     property bool landscape: container.width > container.height
-    property int contentY: 0
+    property int selectedDay: 0
 
     PivotHeader {
         id: headerRow
@@ -41,9 +41,9 @@ Rectangle {
         anchors {
             left: parent.left
             top: headerRow.bottom
-            leftMargin: 10
-            rightMargin: 10
-            topMargin: 10
+            leftMargin: 4
+            rightMargin: 4
+            topMargin: 6
         }
         itemHeight: 80
         height: itemHeight*24
@@ -61,9 +61,9 @@ Rectangle {
             bottom: parent.bottom
             left: hourColumn.right
             right: parent.right
-            topMargin: 10
-            leftMargin: 10
-            rightMargin: 10
+            topMargin: 6
+            leftMargin: 4
+            rightMargin: 4
         }
         onIndexChanged: {
             console.log("Contentpane index changed: " + index);
