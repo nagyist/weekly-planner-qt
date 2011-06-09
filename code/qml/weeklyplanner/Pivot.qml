@@ -1,5 +1,4 @@
 import QtQuick 1.0
-import Qt.labs.gestures 1.0
 
 Rectangle {
     id: container
@@ -20,67 +19,19 @@ Rectangle {
 
     // Internal properties, don't set from outside
     property bool landscape: container.width > container.height
-    property int selectedDay: 0
     property int contentY: 0
 
-    // Pivot headers
-    ListView {
+    PivotHeader {
         id: headerRow
+
+        model: week
+        height: parent.headerHeight
+        headerItemWidth: parent.headerItemWidth
 
         anchors {
             left: parent.left
             right: parent.right
             top: parent.top
-        }
-        Component.onCompleted: {
-            currentIndex = 0;
-            contentPane.currentIndex = 0;
-        }
-
-        cacheBuffer: 7
-        height: container.headerHeight
-        model: week
-        delegate: pivotHeaderDelegate
-        orientation: ListView.Horizontal
-        snapMode: ListView.SnapToItem
-        highlightFollowsCurrentItem: true
-        preferredHighlightBegin: 0
-        preferredHighlightEnd: container.headerItemWidth
-        highlightRangeMode: ListView.StrictlyEnforceRange
-        onCurrentIndexChanged: {
-            console.log("Current idx changed to " + currentIndex);
-            contentPane.currentIndex = currentIndex;
-        }
-    }
-
-    Component {
-        id: pivotHeaderDelegate
-
-        Rectangle {
-            height: parent.height
-            width: container.headerItemWidth
-            border.color: container.borderColor
-            border.width: 2
-
-            color: container.backgroundColor
-            Text {
-                color: container.headerTextColor
-                anchors.centerIn: parent
-                text: dayName
-                font {
-                    pixelSize: 32
-                }
-            }
-
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    console.log("clicked " + dayName + " at " + index);
-                    headerRow.currentIndex = index;
-                    container.selectedDay = index;
-                    contentPane.currentIndex = index;
-                }
-            }
         }
     }
 

@@ -14,7 +14,6 @@ Rectangle {
     height: hourSpan * container.itemHeight
     border.color: container.borderColor
     border.width: 2
-    z: hourSpan > 1 ? 10 : 1
     color: cellEdit.focus ? container.backgroundColorFocus : container.backgroundColor
 
     function reset() {
