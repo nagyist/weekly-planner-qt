@@ -156,6 +156,7 @@ Rectangle {
         }
         clip: true
         orientation: ListView.Horizontal
+        highlightMoveDuration: 330
 
         model: week
         delegate: pageDelegate
