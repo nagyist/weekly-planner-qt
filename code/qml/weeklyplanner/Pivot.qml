@@ -65,5 +65,10 @@ Rectangle {
             leftMargin: 10
             rightMargin: 10
         }
+        onIndexChanged: {
+            console.log("Contentpane index changed: " + index);
+            container.selectedDay = index;
+            headerRow.currentIndex = index;
+        }
     }
 }
