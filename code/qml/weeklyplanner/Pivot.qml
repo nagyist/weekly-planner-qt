@@ -32,6 +32,11 @@ Rectangle {
             right: parent.right
             top: parent.top
         }
+        Component.onCompleted: {
+            currentIndex = 0;
+            contentPane.currentIndex = 0;
+        }
+
         cacheBuffer: 7
         height: container.headerHeight
         model: week
@@ -85,12 +90,12 @@ Rectangle {
         anchors {
             left: parent.left
             top: headerRow.bottom
-            bottom: parent.bottom
             leftMargin: 10
             rightMargin: 10
             topMargin: 10
-            bottomMargin: 10
         }
+        itemHeight: 80
+        height: itemHeight*24
         textColor: container.textColor
         backgroundColor: container.backgroundColor
         borderColor: container.borderColor
@@ -99,6 +104,7 @@ Rectangle {
     PivotContentPane {
         id: contentPane
         model: week
+        pageHeight: hourColumn.height
         anchors {
             top: headerRow.bottom
             bottom: parent.bottom

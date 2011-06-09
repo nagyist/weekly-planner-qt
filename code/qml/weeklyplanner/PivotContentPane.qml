@@ -1,15 +1,15 @@
 import QtQuick 1.0
 
 Item {
+    id: container
     property alias model: contentPane.model
     property alias currentIndex: contentPane.currentIndex
-
+    property int pageHeight: 640
     ListView {
         id: contentPane
 
         Component.onCompleted: {
             console.log("Content pane loaded");
-            currentIndex = 0;
         }
 
         anchors {
@@ -25,8 +25,8 @@ Item {
         id: pageDelegate
 
         Rectangle {
-            width: contentPane.width - 20
-            height: hourColumn.height
+            width: contentPane.width
+            height: container.pageHeight
             color: {
                 // Just a test
                 var colors = ["red", "green", "blue", "orange", "gray", "steelblue", "fuchsia"];

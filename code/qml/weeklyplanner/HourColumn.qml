@@ -13,6 +13,7 @@ ListView {
     }
 
     width: 80
+    height: hourModel.count() * itemHeight
 
     model: hourModel
     delegate: hourDelegate
