@@ -18,6 +18,11 @@ Item {
         clip: true
         orientation: ListView.Horizontal
         highlightMoveDuration: 330
+        snapMode: ListView.SnapToItem
+        highlightFollowsCurrentItem: true
+        preferredHighlightBegin: 0
+        preferredHighlightEnd: contentPane.width
+        highlightRangeMode: ListView.StrictlyEnforceRange
         delegate: pageDelegate
     }
 
