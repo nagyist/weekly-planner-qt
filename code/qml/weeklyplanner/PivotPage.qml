@@ -1,5 +1,4 @@
 import QtQuick 1.0
-import Templates 1.0
 
 Item {
     id: container
