@@ -24,14 +24,10 @@ Item {
     Component {
         id: pageDelegate
 
-        Rectangle {
+        PivotPage {
             width: contentPane.width
             height: container.pageHeight
-            color: {
-                // Just a test
-                var colors = ["red", "green", "blue", "orange", "gray", "steelblue", "fuchsia"];
-                return colors[index % colors.length];
-            }
+            model: container.model.day(index).items()
         }
     }
 }
