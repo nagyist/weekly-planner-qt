@@ -2,6 +2,7 @@ import QtQuick 1.0
 
 Item {
     id: container
+    signal indexChanged(int index)
     property alias model: contentPane.model
     property alias currentIndex: contentPane.currentIndex
     property int pageHeight: 640
@@ -24,6 +25,7 @@ Item {
         preferredHighlightEnd: contentPane.width
         highlightRangeMode: ListView.StrictlyEnforceRange
         delegate: pageDelegate
+        onCurrentIndexChanged: container.indexChanged(currentIndex);
     }
 
     Component {

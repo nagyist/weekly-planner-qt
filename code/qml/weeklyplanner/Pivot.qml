@@ -48,8 +48,9 @@ Rectangle {
         preferredHighlightEnd: container.headerItemWidth
         highlightRangeMode: ListView.StrictlyEnforceRange
         onCurrentIndexChanged: {
-            console.log("Current idx changed to " + currentIndex);
+            container.selectedDay = currentIndex;
             contentPane.currentIndex = currentIndex;
+            console.log("Selected day: " + selectedDay);
         }
     }
 
@@ -113,6 +114,11 @@ Rectangle {
             topMargin: 10
             leftMargin: 10
             rightMargin: 10
+        }
+        onIndexChanged: {
+            console.log("Contentpane index changed: " + index);
+            container.selectedDay = index;
+            headerRow.currentIndex = index;
         }
     }
 }
