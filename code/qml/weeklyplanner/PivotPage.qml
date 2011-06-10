@@ -13,14 +13,24 @@ Item {
     property color borderColor: "white"
     property variant model: null
 
+    signal contentYChanged(int y)
+    property alias contentY: weekDay.contentY
+
     width: 360
     height: 640
 
     ListView {
         id: weekDay
 
+        Component.onCompleted: {
+            console.log("weekDay w*h: (" + weekDay.width + "x" + weekDay.height +
+                        ") \ncontent w*h: (" + weekDay.contentWidth + "x" + weekDay.contentHeight + ")");
+        }
+
         anchors.fill: parent
         model: container.model
+        contentHeight: container.itemHeight * weekDay.count
+
         delegate: Cell {
             itemHeight: container.itemHeight
             textColor: container.textColor
@@ -39,6 +49,8 @@ Item {
             container.indexChanged(currentIndex);
             console.log("IDX: " + currentIndex);
         }
-    }
 
+        // Notify the changed value.
+        onContentYChanged: container.contentYChanged(weekDay.contentY)
+    }
 }

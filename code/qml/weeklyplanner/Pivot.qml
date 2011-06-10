@@ -41,25 +41,33 @@ Rectangle {
 
     HourColumn {
         id: hourColumn
+        // Bind the hourcolumn to move with the PivotPage
+        //contentY: contentPane.contentY
 
+        height: container.height
         anchors {
-            left: parent.left
             top: headerRow.bottom
+            bottom: parent.bottom
+            left: parent.left
             leftMargin: 4
             rightMargin: 4
             topMargin: 6
         }
         itemHeight: 80
-        height: itemHeight*24
+        contentHeight: itemHeight*24
         textColor: container.textColor
         backgroundColor: container.backgroundColor
         borderColor: container.borderColor
+
+        onContentYChanged: {
+            contentPane.contentY = hourColumn.contentY;
+        }
     }
 
     PivotContentPane {
         id: contentPane
         model: week
-        pageHeight: hourColumn.height
+        pageHeight: container.height
         anchors {
             top: headerRow.bottom
             bottom: parent.bottom
@@ -72,6 +80,12 @@ Rectangle {
         onIndexChanged: {
             console.log("Contentpane index changed: " + index);
             headerRow.currentIndex = index;
+        }
+
+        // Bind the hourcolumn to move with the PivotPage
+        onContentYChanged: {
+//            console.log("PivContPane, onContYChged, new Y: " + y);
+            hourColumn.contentY = y;
         }
     }
 }

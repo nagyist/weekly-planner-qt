@@ -9,18 +9,17 @@ ListView {
     property color textColor: "white"
 
     Component.onCompleted: {
-        console.log("HourColumn size: (" + hourColumn.width + "," + hourColumn.height + ")");
+        console.log("HourColumn size: (" + hourColumn.width + "," + hourColumn.height +
+                    "), contentSize: (" +hourColumn.contentWidth + "x" + hourColumn.contentHeight + ")");
     }
 
     width: 80
-    height: hourModel.count() * itemHeight
+    contentHeight: hourModel.count() * itemHeight
 
     model: hourModel
     delegate: hourDelegate
     snapMode: ListView.SnapToItem
-    // The hourColumn list & the dayItems should be flickable together,
-    // thus marking these separately as non-interactive.
-    interactive: false
+    clip: true
 
     Component {
         id: hourDelegate
@@ -44,7 +43,6 @@ ListView {
                 anchors.centerIn: parent
                 text: startTime
             }
-
         }
     }
 
