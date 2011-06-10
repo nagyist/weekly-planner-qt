@@ -30,6 +30,9 @@ Rectangle {
             margins: 2
         }
         onClicked: cellEdit.focus = false;
+
+        onCopy: contentPane.clipboard = cellEdit.text;
+        onPaste: cellEdit.text = contentPane.clipboard;
     }
 
     TextEdit {

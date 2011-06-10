@@ -9,6 +9,8 @@ Item {
     ListView {
         id: contentPane
 
+        property string clipboard: ""
+
         Component.onCompleted: {
             console.log("Content pane loaded");
         }
