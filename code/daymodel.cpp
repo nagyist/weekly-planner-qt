@@ -26,7 +26,12 @@ DayModel::DayModel(const QString& name, QObject *parent) :
     }
     setRoleNames(DayModel::roleNames());
 
-    setHourSpan(9, 3);
+    // Sets the seed within the range 0-999
+    qsrand(QTime::currentTime().msec());
+    // Set 0 to 3 spans / day
+    for (int i = qrand() % 4; i > 0; i--) {
+        setHourSpan(qrand() % 24, (qrand() % 3) + 2);
+    }
 }
 
 DayModel::~DayModel()

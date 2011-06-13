@@ -8,6 +8,12 @@ ListView {
     property color borderColor: "white"
     property color textColor: "white"
 
+    function refresh() {
+        console.log("Refreshed")
+        hourColumn.model = 0;
+        hourColumn.model = hourModel;
+    }
+
     Component.onCompleted: {
         console.log("HourColumn size: (" + hourColumn.width + "," + hourColumn.height +
                     "), contentSize: (" +hourColumn.contentWidth + "x" + hourColumn.contentHeight + ")");

@@ -36,13 +36,13 @@ Rectangle {
         onIndexChanged: {
             console.log("PivotHeader index changed: " + index);
             contentPane.currentIndex = index;
+            // Change the correct day also to the HourColumn
+            hourColumn.refresh();
         }
     }
 
     HourColumn {
         id: hourColumn
-        // Bind the hourcolumn to move with the PivotPage
-        //contentY: contentPane.contentY
 
         height: container.height
         anchors {
@@ -80,6 +80,8 @@ Rectangle {
         onIndexChanged: {
             console.log("Contentpane index changed: " + index);
             headerRow.currentIndex = index;
+            // Change the correct day also to the HourColumn
+            hourColumn.refresh();
         }
 
         // Bind the hourcolumn to move with the PivotPage
