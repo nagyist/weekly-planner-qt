@@ -67,7 +67,7 @@ Rectangle {
     PivotContentPane {
         id: contentPane
         model: week
-        pageHeight: container.height
+        pageHeight: container.height - container.headerHeight
         anchors {
             top: headerRow.bottom
             bottom: parent.bottom
