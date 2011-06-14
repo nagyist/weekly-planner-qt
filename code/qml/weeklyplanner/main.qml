@@ -19,8 +19,8 @@ Item {
             right: parent.right
             margins: 5
         }
-        width: 66
-        height:  66
+        width: 54
+        height:  54
         onClicked: Qt.quit();
     }
 }

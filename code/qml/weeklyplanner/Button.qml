@@ -13,19 +13,19 @@ Item {
 
     property bool active: false
 
-    property string bgImage: 'gfx/exitbutton_icon.png';
-    property string bgImagePressed: 'gfx/exitbutton_icon_pressed.png';
+    property string bgImage: 'gfx/exit_button.png';
+    property string bgImagePressed: 'gfx/exit_button.png';
     property string bgImageActive: '';
 
     signal clicked(string button)
 
-    width: 140
-    height: 60
+    width: 54
+    height: 54
     opacity: enabled ? 1.0 : 0.5    
 
     BorderImage {
         id: background
-        border { top: 11; bottom: 40; left: 38; right: 38; }
+        border { top: 0; bottom: 0; left: 0; right: 0; }
         source: bgImage
         width: parent.width
         height: parent.height
