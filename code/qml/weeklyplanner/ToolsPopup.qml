@@ -7,8 +7,8 @@ Rectangle {
     signal copy()
     signal paste()
 
-    property color backgroundColor: "gray"
-    property color borderColor: "black"
+    property color backgroundColor: "#3B3B3B"
+    property color borderColor: "white"
     property int borderWidth: 2
     property int iconSpacing: 5
 
@@ -25,47 +25,53 @@ Rectangle {
         color: container.borderColor
     }
 
+    // Buttons for copying and pasting the cell content
+    Button {
+        id: copyButton
 
-    Row {
-        spacing: container.iconSpacing
-        width: parent.width
-        height: parent.height
+        buttonName: "copyButton"
+        bgImage: "gfx/copy.png"
+        bgImagePressed: "gfx/copy.png"
+        anchors.verticalCenter: parent.verticalCenter
 
-        // Buttons for copying and pasting the cell content
-        Button {
-            buttonName: "copyButton"
-            bgImage: "gfx/zoom_out.png"
-            bgImagePressed: "gfx/zoom_out.png"
-            anchors.verticalCenter: parent.verticalCenter
+        width: 45
+        height: 45
+        opacity: 0.8
 
-            width: 49
-            height: 49
-            opacity: 0.8
-
-            onClicked: {
-                console.log("copyButton onClicked");
-                copy();
-                container.clicked();
-            }
+        anchors {
+            left: parent.left
+            leftMargin: parent.iconSpacing
         }
 
-        Button {
-            buttonName: "pasteButton"
-            bgImage: "gfx/zoom_out.png"
-            bgImagePressed: "gfx/zoom_out.png"
-            anchors.verticalCenter: parent.verticalCenter
-
-            width: 49
-            height: 49
-            opacity: 0.8
-
-            onClicked: {
-                console.log("pasteButton onClicked");
-                paste();
-                container.clicked();
-            }
+        onClicked: {
+            console.log("copyButton onClicked");
+            copy();
+            container.clicked();
         }
     }
+
+    Button {
+        buttonName: "pasteButton"
+        bgImage: "gfx/paste.png"
+        bgImagePressed: "gfx/paste.png"
+        anchors.verticalCenter: parent.verticalCenter
+
+        width: 45
+        height: 45
+        opacity: 0.8
+
+        anchors {
+            left: copyButton.right
+            leftMargin: parent.iconSpacing
+        }
+
+        onClicked: {
+            console.log("pasteButton onClicked");
+            paste();
+            container.clicked();
+        }
+    }
+
 
     //    Timer {
     //        id: hideTimer

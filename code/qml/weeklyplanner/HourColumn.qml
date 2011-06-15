@@ -26,6 +26,7 @@ ListView {
     delegate: hourDelegate
     snapMode: ListView.SnapToItem
     clip: true
+    interactive: false
 
     Component {
         id: hourDelegate

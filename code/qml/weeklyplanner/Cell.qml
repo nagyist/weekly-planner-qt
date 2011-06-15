@@ -20,6 +20,13 @@ Rectangle {
         console.log("Item " + itemData + " reset called!")
     }
 
+    // Background image
+    Image {
+        anchors.fill: parent
+        source: "gfx/text_field.png"
+        visible: cellEdit.focus ? true : false
+    }
+
     ToolsPopup {
         id: tools
 

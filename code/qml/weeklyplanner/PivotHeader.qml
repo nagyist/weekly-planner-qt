@@ -24,6 +24,7 @@ Item {
             width: headerRow.headerItemWidth
             border.color: headerRow.borderColor
             border.width: 2
+            opacity: PathView.transparency
 
             color: headerRow.backgroundColor
             Text {
@@ -67,9 +68,17 @@ Item {
             // Start
             startX: -90
             startY: headerRow.height / 2
+            PathAttribute { name: "transparency"; value: 0.0 }
+
+            PathLine { x: headerRow.width / 4; y: headerRow.height / 2; }
+            PathAttribute { name: "transparency"; value: 1.0 }
+
+            PathLine { x: headerRow.width * 3 / 4; y: headerRow.height / 2; }
+            PathAttribute { name: "transparency"; value: 0.3 }
 
             // Stop
             PathLine { x: headerRow.width + 90; y: headerRow.height / 2; }
+            PathAttribute { name: "transparency"; value: 0.0 }
         }
     }
 }
