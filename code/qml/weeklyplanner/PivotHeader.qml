@@ -8,8 +8,9 @@ Item {
     width: 360
 
     property alias model: pathView.model
-    property int headerItemWidth: 180
+    property int headerItemWidth: 182
     property int currentIndex: 0
+    property bool borders: true
     property color borderColor: "white"
     property color backgroundColor: "gray"
     property color headerTextColor: "white"
@@ -23,14 +24,14 @@ Item {
         Rectangle {
             height: parent.height
             width: headerRow.headerItemWidth
-            border.color: headerRow.borderColor
-            border.width: 2
-            opacity: PathView.transparency
+            border.width: borders ? 2 : 0
+            border.color: borders ? headerRow.borderColor : "#00000000"
 
             color: headerRow.backgroundColor
             Text {
                 color: headerRow.headerTextColor
                 anchors.centerIn: parent
+                opacity: PathView.transparency
                 text: dayName
                 font {
                     pixelSize: 32

@@ -14,11 +14,6 @@ ListView {
         hourColumn.model = hourModel;
     }
 
-    Component.onCompleted: {
-        console.log("HourColumn size: (" + hourColumn.width + "," + hourColumn.height +
-                    "), contentSize: (" +hourColumn.contentWidth + "x" + hourColumn.contentHeight + ")");
-    }
-
     width: 80
     contentHeight: hourModel.count() * itemHeight
 
@@ -27,6 +22,11 @@ ListView {
     snapMode: ListView.SnapToItem
     clip: true
     interactive: false
+
+    Component.onCompleted: {
+        console.log("HourColumn size: (" + hourColumn.width + "," + hourColumn.height +
+                    "), contentSize: (" +hourColumn.contentWidth + "x" + hourColumn.contentHeight + ")");
+    }
 
     Component {
         id: hourDelegate

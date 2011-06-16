@@ -8,8 +8,8 @@ Rectangle {
     color: "lightgray"
 
     property variant model: null
-    property int headerHeight: 80
-    property int headerItemWidth: landscape ? 212 : 180
+    property int headerHeight: 70
+    property int headerItemWidth: landscape ? 214 : 182
     property color backgroundColor: "gray"
     property color backgroundColorFocus: "lightGray"
     property color borderColor: "white"
@@ -27,6 +27,8 @@ Rectangle {
         height: parent.headerHeight
         headerItemWidth: parent.headerItemWidth
         landscape: parent.landscape
+        // Don't show borders on the header items
+        borders: false
 
         anchors {
             left: parent.left
@@ -46,15 +48,18 @@ Rectangle {
         id: hourColumn
 
         height: container.height
+        width: 60
+        itemHeight: 80
+
         anchors {
             top: headerRow.bottom
             bottom: parent.bottom
             left: parent.left
-            leftMargin: 4
-            rightMargin: 4
-            topMargin: 6
+            topMargin: 2
+            leftMargin: 2
+            rightMargin: 2
         }
-        itemHeight: 80
+
         contentHeight: itemHeight*24
         textColor: container.textColor
         backgroundColor: container.backgroundColor
@@ -74,9 +79,9 @@ Rectangle {
             bottom: parent.bottom
             left: hourColumn.right
             right: parent.right
-            topMargin: 6
-            leftMargin: 4
-            rightMargin: 4
+            topMargin: 2
+            leftMargin: 2
+            rightMargin: 2
         }
         onIndexChanged: {
             console.log("Contentpane index changed: " + index);
