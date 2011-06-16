@@ -18,7 +18,7 @@ Item {
             margins: 5
         }
         width: 54
-        height:  54
+        height: 54
         onClicked: Qt.quit();
     }
 }

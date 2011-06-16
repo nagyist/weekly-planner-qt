@@ -1,34 +1,51 @@
 import QtQuick 1.0
 
-ListView {
-    id: hourColumn
+Item {
+    id: container
 
+    // Defines the column height. Should be set from outside.
     property int itemHeight: 80
+    // Settable colors.
     property color backgroundColor: "gray"
     property color borderColor: "white"
     property color textColor: "white"
+    // Defined in order to scorll the hour column with content pane.
+    property alias contentY: hourColumn.contentY
 
+    // Signalled, when hour column's y-coordinate changes.
+    signal contentYChanged()
+    // Called when the page switches. Resets the hour column back to 00:00.
     function refresh() {
         console.log("Refreshed")
         hourColumn.model = 0;
         hourColumn.model = hourModel;
     }
 
-    width: 80
-    contentHeight: hourModel.count * itemHeight
+    // Hours are being shown in a vertical list
+    ListView {
+        id: hourColumn
 
-    model: hourModel
-    delegate: hourDelegate
-    snapMode: ListView.SnapToItem
-    clip: true
-    interactive: false
+        anchors.fill: parent
+        contentHeight: hourModel.count * container.itemHeight
 
-    Component.onCompleted: {
-        console.log("HourColumn size: (" + hourColumn.width + "," + hourColumn.height +
-                    "), contentSize: (" + hourColumn.contentWidth + "x" + hourColumn.contentHeight + ")" +
-                    " hourModel count: " + hourModel.count + " itemHeight: " + hourColumn.itemHeight);
+        model: hourModel
+        delegate: hourDelegate
+        snapMode: ListView.SnapToItem
+        clip: true
+        interactive: false
+
+        Component.onCompleted: {
+            console.log("HourColumn size: (" + hourColumn.width + "," + hourColumn.height +
+                        "), contentSize: (" + hourColumn.contentWidth + "x" + hourColumn.contentHeight + ")" +
+                        " hourModel count: " + hourModel.count + " itemHeight: " + container.itemHeight);
+        }
+
+        onContentYChanged: {
+            container.contentYChanged();
+        }
     }
 
+    // Hour prototype item.
     Component {
         id: hourDelegate
 
@@ -39,14 +56,14 @@ ListView {
                 console.log("HourItem " + startTime + " created on QML side!")
             }
 
-            width: parent.width
-            height: hourColumn.itemHeight
-            border.color: hourColumn.borderColor
+            width: container.width
+            height: container.itemHeight
+            border.color: container.borderColor
             border.width: 2
-            color: hourColumn.backgroundColor
+            color: container.backgroundColor
 
             Text {
-                color: hourColumn.textColor
+                color: container.textColor
                 //font.bold: true
                 anchors.centerIn: parent
                 text: startTime
@@ -54,6 +71,7 @@ ListView {
         }
     }
 
+    // Static list containing the hours.
     ListModel {
         id: hourModel
 

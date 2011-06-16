@@ -56,7 +56,8 @@ Rectangle {
     HourColumn {
         id: hourColumn
 
-        height: container.height
+        // Set the hourColumn to be quite narrow. The anchors will
+        // define the hourColumn's height.
         width: 60
         itemHeight: 80
 
