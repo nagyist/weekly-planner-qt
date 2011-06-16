@@ -2,18 +2,24 @@ import QtQuick 1.0
 
 // Pivot headers
 Item {
-    id: headerRow
+    id: container
 
     height: 80
     width: 360
 
     property alias model: pathView.model
+    // How wide the header is. Should be differentiated between portrait
+    // and landscape modes.
     property int headerItemWidth: 182
     property int currentIndex: 0
+    // Defines whether or not to show borders & and the color of it.
     property bool borders: true
     property color borderColor: "white"
+    // Colors.
     property color backgroundColor: "gray"
     property color headerTextColor: "white"
+    // Defines, wheter the pathview can be flicked or only clicked.
+    property bool flickable: true
     property bool landscape: false
 
     signal indexChanged(int index)
@@ -23,13 +29,13 @@ Item {
 
         Rectangle {
             height: parent.height
-            width: headerRow.headerItemWidth
+            width: container.headerItemWidth
             border.width: borders ? 2 : 0
-            border.color: borders ? headerRow.borderColor : "#00000000"
+            border.color: borders ? container.borderColor : "#00000000"
 
-            color: headerRow.backgroundColor
+            color: container.backgroundColor
             Text {
-                color: headerRow.headerTextColor
+                color: container.headerTextColor
                 anchors.centerIn: parent
                 opacity: PathView.transparency
                 text: dayName
@@ -44,7 +50,7 @@ Item {
                     if (pathView.currentIndex != index) {
                         console.log("Focusing on " + dayName +
                                     ". Clicked index was: " + index)
-                        headerRow.currentIndex = index;
+                        container.currentIndex = index;
                     }
                 }
             }
@@ -54,41 +60,42 @@ Item {
     PathView {
         id: pathView
 
+        anchors.fill: parent
         delegate: pivotHeaderDelegate
         pathItemCount: parent.landscape ? 4 : 3
 
-        anchors.fill: parent
+        interactive: parent.flickable
         preferredHighlightBegin: parent.landscape ? 1/4 : 1/3
         preferredHighlightEnd: parent.landscape ? 1/4 : 1/3
-        currentIndex: headerRow.currentIndex
+        currentIndex: container.currentIndex
         onCurrentIndexChanged: {
             console.log("CurrentIndexChanged: " + pathView.currentIndex)
-            headerRow.indexChanged(pathView.currentIndex)
+            container.indexChanged(pathView.currentIndex)
         }
 
         path: Path {
             id: pivotPath
-            property double scaleFactor: headerRow.landscape ? 1/5 : 1/4
+            property double scaleFactor: container.landscape ? 1/5 : 1/4
 
             // Start
-            startX: -(headerRow.headerItemWidth / 2)
-            startY: headerRow.height / 2
+            startX: -(container.headerItemWidth / 2)
+            startY: container.height / 2
             PathAttribute { name: "transparency"; value: 0.3 }
 
             PathLine {
-                x: headerRow.width * pivotPath.scaleFactor;
-                y: headerRow.height / 2; }
+                x: container.width * pivotPath.scaleFactor;
+                y: container.height / 2; }
             PathAttribute { name: "transparency"; value: 1.0 }
 
             PathLine {
-                x: headerRow.width * 2 * pivotPath.scaleFactor;
-                y: headerRow.height / 2; }
+                x: container.width * 2 * pivotPath.scaleFactor;
+                y: container.height / 2; }
             PathAttribute { name: "transparency"; value: 0.3 }
 
             // Stop
             PathLine {
-                x: headerRow.width + (headerRow.headerItemWidth / 2);
-                y: headerRow.height / 2; }
+                x: container.width + (container.headerItemWidth / 2);
+                y: container.height / 2; }
             PathAttribute { name: "transparency"; value: 0.0 }
         }
     }

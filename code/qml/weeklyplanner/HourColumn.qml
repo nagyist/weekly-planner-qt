@@ -15,7 +15,7 @@ ListView {
     }
 
     width: 80
-    contentHeight: hourModel.count() * itemHeight
+    contentHeight: hourModel.count * itemHeight
 
     model: hourModel
     delegate: hourDelegate
@@ -25,7 +25,8 @@ ListView {
 
     Component.onCompleted: {
         console.log("HourColumn size: (" + hourColumn.width + "," + hourColumn.height +
-                    "), contentSize: (" +hourColumn.contentWidth + "x" + hourColumn.contentHeight + ")");
+                    "), contentSize: (" + hourColumn.contentWidth + "x" + hourColumn.contentHeight + ")" +
+                    " hourModel count: " + hourModel.count + " itemHeight: " + hourColumn.itemHeight);
     }
 
     Component {

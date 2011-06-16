@@ -2,12 +2,14 @@ import QtQuick 1.0
 
 Item {
     id: container
-    signal indexChanged(int index)
+
     property alias model: contentPane.model
     property alias currentIndex: contentPane.currentIndex
     property int pageHeight: 640
-
     property int contentY: 0
+    property bool landscape: false
+
+    signal indexChanged(int index)
     signal contentYChanged(int y)
 
     ListView {
@@ -24,7 +26,8 @@ Item {
         anchors.fill: parent
         orientation: ListView.Horizontal
         highlightMoveDuration: 330
-        snapMode: ListView.SnapToItem
+        snapMode: ListView.SnapOneItem
+        flickDeceleration: landscape ? 3000 : 500
         highlightFollowsCurrentItem: true
         preferredHighlightBegin: 0
         preferredHighlightEnd: contentPane.width
