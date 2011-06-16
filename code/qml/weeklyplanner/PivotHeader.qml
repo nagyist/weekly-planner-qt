@@ -13,6 +13,7 @@ Item {
     property color borderColor: "white"
     property color backgroundColor: "gray"
     property color headerTextColor: "white"
+    property bool landscape: false
 
     signal indexChanged(int index)
 
@@ -53,11 +54,11 @@ Item {
         id: pathView
 
         delegate: pivotHeaderDelegate
-        pathItemCount: 3
+        pathItemCount: parent.landscape ? 4 : 3
 
         anchors.fill: parent
-        preferredHighlightBegin: 0.3333
-        preferredHighlightEnd: 0.3333
+        preferredHighlightBegin: parent.landscape ? 1/4 : 1/3
+        preferredHighlightEnd: parent.landscape ? 1/4 : 1/3
         currentIndex: headerRow.currentIndex
         onCurrentIndexChanged: {
             console.log("CurrentIndexChanged: " + pathView.currentIndex)
@@ -65,19 +66,28 @@ Item {
         }
 
         path: Path {
-            // Start
-            startX: -90
-            startY: headerRow.height / 2
-            PathAttribute { name: "transparency"; value: 0.0 }
+            id: pivotPath
+            property double scaleFactor: headerRow.landscape ? 1/5 : 1/4
 
-            PathLine { x: headerRow.width / 4; y: headerRow.height / 2; }
+            // Start
+            startX: -(headerRow.headerItemWidth / 2)
+            startY: headerRow.height / 2
+            PathAttribute { name: "transparency"; value: 0.3 }
+
+            PathLine {
+                x: headerRow.width * pivotPath.scaleFactor;
+                y: headerRow.height / 2; }
             PathAttribute { name: "transparency"; value: 1.0 }
 
-            PathLine { x: headerRow.width * 3 / 4; y: headerRow.height / 2; }
+            PathLine {
+                x: headerRow.width * 2 * pivotPath.scaleFactor;
+                y: headerRow.height / 2; }
             PathAttribute { name: "transparency"; value: 0.3 }
 
             // Stop
-            PathLine { x: headerRow.width + 90; y: headerRow.height / 2; }
+            PathLine {
+                x: headerRow.width + (headerRow.headerItemWidth / 2);
+                y: headerRow.height / 2; }
             PathAttribute { name: "transparency"; value: 0.0 }
         }
     }

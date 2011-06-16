@@ -3,13 +3,13 @@ import QtQuick 1.0
 Rectangle {
     id: container
 
-    width: 360
-    height: 640
+    width: 640
+    height: 360
     color: "lightgray"
 
     property variant model: null
     property int headerHeight: 80
-    property int headerItemWidth: 180
+    property int headerItemWidth: landscape ? 212 : 180
     property color backgroundColor: "gray"
     property color backgroundColorFocus: "lightGray"
     property color borderColor: "white"
@@ -26,6 +26,7 @@ Rectangle {
         model: week
         height: parent.headerHeight
         headerItemWidth: parent.headerItemWidth
+        landscape: parent.landscape
 
         anchors {
             left: parent.left

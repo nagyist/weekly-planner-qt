@@ -9,8 +9,6 @@ Item {
     Pivot {
         id: mainPivot
         anchors.fill: parent
-        headerHeight: 80
-        headerItemWidth: 180
     }
 
     Button {
