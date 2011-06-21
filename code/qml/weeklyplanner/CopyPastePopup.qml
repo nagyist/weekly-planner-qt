@@ -75,11 +75,11 @@ Rectangle {
 
     //    Timer {
     //        id: hideTimer
-    //        interval: toolsPopup.timeout
-    //        running: toolsPopup.opacity > 0 ? true : false
+    //        interval: container.timeout
+    //        running: container.opacity > 0 ? true : false
     //        repeat: false
     //        onTriggered: {
-    //            toolsPopup.opacity = 0
+    //            container.opacity = 0
     //        }
     //    }
 

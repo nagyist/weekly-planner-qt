@@ -27,9 +27,7 @@ Rectangle {
         visible: cellEdit.focus ? true : false
     }
 
-    ToolsPopup {
-        id: tools
-
+    CopyPastePopup {
         opacity: cellEdit.focus ? 1 : 0
         anchors {
             bottom: parent.top
@@ -50,11 +48,27 @@ Rectangle {
         height: parent.height
         text: itemData + " for " + hourSpan + " hours"
         color: focus ? container.textColorFocus : container.textColor
+        // Don't use automatic focus. Makes the swiping experience better.
+        activeFocusOnPress: false
 
         onTextChanged: {
             //console.log("Text changed, setting new text to model");
             // TODO: CALL MODEL SETTEXT -FUNCTION!
             //setItemData(cellEdit.text);
+        }
+
+        // Manually adjust the text edit focus.
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                if (!cellEdit.activeFocus) {
+                    cellEdit.forceActiveFocus();
+                    cellEdit.openSoftwareInputPanel();
+                } else {
+                    cellEdit.focus = false;
+                }
+            }
+            onPressAndHold: cellEdit.closeSoftwareInputPanel();
         }
     }
 }
