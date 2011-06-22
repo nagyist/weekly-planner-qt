@@ -18,7 +18,7 @@ Item {
     // Colors.
     property color backgroundColor: "gray"
     property color headerTextColor: "white"
-    // Defines, wheter the pathview can be flicked or only clicked.
+    // Defines, whether the pathview can be flicked or only clicked.
     property bool flickable: true
     property bool landscape: false
 
@@ -69,7 +69,6 @@ Item {
         preferredHighlightEnd: parent.landscape ? 1/4 : 1/3
         currentIndex: container.currentIndex
         onCurrentIndexChanged: {
-            console.log("CurrentIndexChanged: " + pathView.currentIndex)
             container.indexChanged(pathView.currentIndex)
         }
 

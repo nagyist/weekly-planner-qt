@@ -72,7 +72,6 @@ Rectangle {
         }
     }
 
-
     //    Timer {
     //        id: hideTimer
     //        interval: container.timeout
