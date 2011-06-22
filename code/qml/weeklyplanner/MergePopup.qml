@@ -1,10 +1,16 @@
 import QtQuick 1.0
 
 Item {
+    id: container
+
     width: 100
     height: 100
-
     property int iconSpacing: 2
+    property int spanCount: 1
+
+    signal mergeDown();
+    signal mergeUp();
+    signal split();
 
     // Two buttons for merging the Cell up/down
     Button {
@@ -17,7 +23,6 @@ Item {
         opacity: 0.8
 
         anchors {
-//            right: parent.right
             top: parent.top
             leftMargin: parent.iconSpacing
             horizontalCenter: parent.horizontalCenter
@@ -25,8 +30,7 @@ Item {
 
         onClicked: {
             console.log("mergeUpButton onClicked");
-//            paste();
-//            container.clicked();
+            container.mergeUp();
         }
     }
 
@@ -40,7 +44,6 @@ Item {
         opacity: 0.8
 
         anchors {
-//            right: parent.right
             bottom: parent.bottom
             leftMargin: parent.iconSpacing
             horizontalCenter: parent.horizontalCenter
@@ -48,8 +51,7 @@ Item {
 
         onClicked: {
             console.log("mergeDownButton onClicked");
-//            paste();
-//            container.clicked();
+            container.mergeDown();
         }
     }
 
@@ -61,19 +63,17 @@ Item {
         width: 45
         height: 45
         opacity: 0.8
-        // TODO!!!
-        visible: false
+        visible: spanCount > 1
 
         anchors {
-//            right: parent.right
             leftMargin: parent.iconSpacing
             horizontalCenter: parent.horizontalCenter
+            verticalCenter: parent.verticalCenter
         }
 
         onClicked: {
             console.log("splitButton onClicked");
-//            paste();
-//            container.clicked();
+            container.split();
         }
     }
 }

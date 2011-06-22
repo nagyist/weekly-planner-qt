@@ -44,7 +44,7 @@ Rectangle {
         onFocusChanged: {
             if (focus == false) {
                 container.z = 0;
-                console.log("DEactivating focus from item " + itemData + " on index: " + index
+                console.log("Deactivating focus from item " + itemData + " on index: " + index
                             + " focus: " + focus + " z:" + z)
             } else {
                 container.z = 100;
@@ -87,10 +87,15 @@ Rectangle {
         opacity: cellEdit.focus ? 1 : 0
         width: 50
         height: parent.height + 50
+        spanCount: hourSpan
 
         anchors {
             right: parent.right
             verticalCenter: parent.verticalCenter
         }
+
+        onMergeDown: console.log("Cell, onMergeDown");
+        onMergeUp: console.log("Cell, onMergeUp");
+        onSplit: console.log("Cell, onSplit");
     }
 }
