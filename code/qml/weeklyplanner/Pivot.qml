@@ -35,8 +35,8 @@ Rectangle {
         // Don't show borders on the header items
         borders: false
         // If the header should work both ways and by flicking,
-        // set this property to true. Now it works just by clicking items.
-        flickable: false
+        // set this property to true.
+        flickable: true
 
         anchors {
             left: parent.left
