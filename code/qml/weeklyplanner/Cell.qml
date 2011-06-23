@@ -14,8 +14,12 @@ Rectangle {
     height: hourSpan * container.itemHeight
     border.color: container.borderColor
     border.width: 2
-    color: cellEdit.focus ? container.backgroundColorFocus : container.backgroundColor
+    color: container.backgroundColor
     z: 0
+
+//    Component.onCompleted: {
+//        console.log("Cell " + itemData + " created on QML side!")
+//    }
 
     // Background image
     Image {
@@ -41,6 +45,8 @@ Rectangle {
             //setItemData(cellEdit.text);
         }
 
+        // When focus changes, change the z-order so that the selected item
+        // will be topmost.
         onFocusChanged: {
             if (focus == false) {
                 container.z = 0;
@@ -58,8 +64,6 @@ Rectangle {
             anchors.fill: parent
             onClicked: {
                 if (!cellEdit.activeFocus) {
-                    //console.log("Activating focus for item " + itemData + " on index: " + index)
-                    //container.z = 100;
                     cellEdit.forceActiveFocus();
                     cellEdit.openSoftwareInputPanel();
                 } else {
@@ -70,6 +74,7 @@ Rectangle {
         }
     }
 
+    // Popup tools for copying/pasting cell content.
     CopyPastePopup {
         opacity: cellEdit.focus ? 1 : 0
         anchors {
@@ -83,6 +88,7 @@ Rectangle {
         onPaste: cellEdit.text = contentPane.clipboard;
     }
 
+    // Tools for merging the cells up/down and splitting merged cells.
     MergePopup {
         opacity: cellEdit.focus ? 1 : 0
         width: 50

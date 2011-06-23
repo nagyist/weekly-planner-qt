@@ -16,9 +16,8 @@ Item {
     signal contentYChanged()
     // Called when the page switches. Resets the hour column back to 00:00.
     function refresh() {
-        console.log("Refreshed")
-        hourColumn.model = 0;
-        hourColumn.model = hourModel;
+        console.log("Refreshed");
+        hourColumn.positionViewAtIndex(0, ListView.Beginning);
     }
 
     // Hours are being shown in a vertical list
@@ -33,6 +32,8 @@ Item {
         snapMode: ListView.SnapToItem
         clip: true
         interactive: false
+        // Cache the whole hourcolumn into memory.
+        cacheBuffer: 1920
 
         Component.onCompleted: {
             console.log("HourColumn size: (" + hourColumn.width + "," + hourColumn.height +
@@ -52,9 +53,9 @@ Item {
         Rectangle {
             id: hourRect
 
-            Component.onCompleted: {
-                console.log("HourItem " + startTime + " created on QML side!")
-            }
+//            Component.onCompleted: {
+//                console.log("HourItem " + startTime + " created on QML side!")
+//            }
 
             width: container.width
             height: container.itemHeight
@@ -64,7 +65,6 @@ Item {
 
             Text {
                 color: container.textColor
-                //font.bold: true
                 anchors.centerIn: parent
                 text: startTime
             }

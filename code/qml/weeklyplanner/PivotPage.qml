@@ -30,6 +30,9 @@ Item {
         anchors.fill: parent
         model: container.model
         contentHeight: container.itemHeight * weekDay.count
+        snapMode: ListView.SnapToItem
+        interactive: true
+        cacheBuffer: 1920
 
         delegate: Cell {
             itemHeight: container.itemHeight
@@ -39,8 +42,7 @@ Item {
             backgroundColorFocus: container.backgroundColorFocus
             borderColor: container.borderColor
         }
-        snapMode: ListView.SnapToItem
-        interactive: true
+
         onFlickEnded: {
             console.log("flick ended");
         }

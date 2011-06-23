@@ -55,6 +55,8 @@ Item {
         }
     }
 
+    // One button for splitting the merged cells. Visible only if the
+    // cell has a spanCount more than one!
     Button {
         buttonName: "splitButton"
         bgImage: "gfx/split.png"

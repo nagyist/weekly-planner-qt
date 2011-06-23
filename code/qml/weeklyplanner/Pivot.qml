@@ -98,7 +98,6 @@ Rectangle {
         }
 
         onIndexChanged: {
-//            console.log("Contentpane index changed: " + index);
             headerRow.currentIndex = index;
             // Change the correct day also to the HourColumn
             hourColumn.refresh();
@@ -106,7 +105,6 @@ Rectangle {
 
         // Bind the hourcolumn to move with the PivotPage
         onContentYChanged: {
-//            console.log("PivContPane, onContYChged, new Y: " + y);
             hourColumn.contentY = y;
         }
     }
