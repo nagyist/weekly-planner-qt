@@ -29,7 +29,6 @@ Item {
         }
 
         onClicked: {
-            console.log("mergeUpButton onClicked");
             container.mergeUp();
         }
     }
@@ -50,7 +49,6 @@ Item {
         }
 
         onClicked: {
-            console.log("mergeDownButton onClicked");
             container.mergeDown();
         }
     }
@@ -74,7 +72,6 @@ Item {
         }
 
         onClicked: {
-            console.log("splitButton onClicked");
             container.split();
         }
     }

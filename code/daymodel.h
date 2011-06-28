@@ -17,6 +17,9 @@ public:
         StartTimeRole = Qt::UserRole+1,
         ItemDataRole,
         HourSpanRole,
+        SpannedRole,
+        HourIdRole,
+
         SetStartTimeRole,
         SetItemDataRole,
         SetHourSpanRole
@@ -28,6 +31,9 @@ public:
 
     // Exposed to QML for changing the Cell text.
     Q_INVOKABLE void setItemData(int index, QString itemData);
+    Q_INVOKABLE void mergeDown(int index);
+    Q_INVOKABLE void mergeUp(int index);
+    Q_INVOKABLE void split(int index);
 
 public: // From QAbstractListModel
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
@@ -37,6 +43,10 @@ public: // From QAbstractListModel
     bool setData( const QModelIndex & index, const QVariant & value, int role = Qt::EditRole );
 public slots:
     bool setHourSpan(int index, int hourSpan);
+
+private: // Methods
+    void setSpanStatus(bool spanned, int index, int parentIndex);
+
 private:
     QString m_dayName;
     QList<Timeslot*> m_items;

@@ -8,6 +8,9 @@ QHash<int, QByteArray> DayModel::roleNames()
     roles[StartTimeRole] = "startTime";
     roles[ItemDataRole] = "itemData";
     roles[HourSpanRole] = "hourSpan";
+    roles[SpannedRole] = "spanned";
+    roles[HourIdRole] = "hourId";
+
     roles[SetStartTimeRole] = "setStartTime";
     roles[SetItemDataRole] = "setItemData";
     roles[SetHourSpanRole] = "setHourSpan";
@@ -19,19 +22,19 @@ DayModel::DayModel(const QString& name, QObject *parent) :
 {
     QString templateItem("Day %1 Item %2");
     for (int i = 0; i < SLOTS_IN_A_DAY; i++) {
-        Timeslot* slot = new Timeslot(QTime(i,0,0,0));
+        Timeslot* slot = new Timeslot(i, QTime(i,0,0,0));
         slot->setItemData(templateItem.arg(m_dayName).arg(i));
         m_items.append(slot);
         qDebug() << "Created slot" << slot->toString();
     }
     setRoleNames(DayModel::roleNames());
 
-    // Sets the seed within the range 0-999
-    qsrand(QTime::currentTime().msec());
-    // Set 0 to 3 spans / day
-    for (int i = qrand() % 4; i > 0; i--) {
-        setHourSpan(qrand() % 24, (qrand() % 3) + 2);
-    }
+//    // Sets the seed within the range 0-999
+//    qsrand(QTime::currentTime().msec());
+//    // Set 0 to 3 spans / day
+//    for (int i = qrand() % 4; i > 0; i--) {
+//        setHourSpan(qrand() % 24, (qrand() % 3) + 2);
+//    }
 }
 
 DayModel::~DayModel()
@@ -56,6 +59,10 @@ QVariant DayModel::data(const QModelIndex &index, int role) const
                 return QVariant(slot->itemData());
             } else if (role == HourSpanRole) {
                 return QVariant(slot->hourSpan());
+            } else if (role == SpannedRole) {
+                return QVariant(slot->spanned());
+            } else if (role == HourIdRole) {
+                return QVariant(slot->hourId());
             } else {
                 return QVariant("ERR: Unknown role for daymodel: " + role);
             }
@@ -121,7 +128,8 @@ bool DayModel::setHourSpan(int index, int hourSpan)
     }
 
     for (int i = hourSpan-1; i > 0; i-- ) {
-        m_items.removeAt(index+i);
+        //m_items.removeAt(index+i);
+        m_items[index+i]->setSpanStatus(true, index);
     }
 
     return retVal;
@@ -131,5 +139,61 @@ void DayModel::setItemData(int index, QString itemData)
 {
     if (index >= 0 && index < m_items.count()) {
         m_items[index]->setItemData(itemData);
+    }
+}
+
+void DayModel::mergeDown(int index)
+{
+    if (index == m_items.count()-1) {
+        qDebug() << "Cannot span downwards!";
+    }
+    else if (index >= 0 && index < m_items.count()-1) {
+        int oldHourSpan = m_items[index]->hourSpan();
+        m_items[index]->setHourSpan(oldHourSpan+1);
+        // Set the next item beneath the spanned item as newly spanned!
+        m_items[index+oldHourSpan]->setSpanStatus(true, index);
+    } else {
+        qDebug() << "Something went severely wrong!";
+    }
+}
+
+void DayModel::mergeUp(int index)
+{
+    qDebug() << "DayModel::mergeUp! Index:" << index;
+    if (index == 0) {
+        qDebug() << "Cannot span upwards!";
+    } else if (index > 0 && index < m_items.count()) {
+        // Get the previous item, as the hourSpan must be set to it.
+        int parentIndex = m_items[index]->parentIndex();
+        qDebug() << "parentIndex:" << parentIndex;
+        if (parentIndex != -1) {
+            qDebug() << "parentIndex != -1 -branch!" << parentIndex;
+            // The item was already spanned, use the given parent index as
+            // starting point for the hourSpan.
+            int oldHourSpan = m_items[parentIndex]->hourSpan();
+            m_items[parentIndex]->setHourSpan(oldHourSpan+1);
+            // Set the currently selected item's spanStatus as true.
+            m_items[index]->setSpanStatus(true, parentIndex);
+        } else {
+            qDebug() << "parentIndex == -1!" << parentIndex;
+            // The item hasn't been spanned before, the given index is valid.
+            int oldHourSpan = m_items[index]->hourSpan();
+            m_items[index-1]->setHourSpan(oldHourSpan+1);
+            m_items[index]->setSpanStatus(true, index);
+        }
+
+    } else {
+        qDebug() << "Something went severely wrong!";
+    }
+}
+
+void DayModel::split(int index)
+{
+    if (index >= 0 && index < m_items.count()) {
+        int hourSpan = m_items[index]->hourSpan();
+        m_items[index]->setHourSpan(1);
+        for (int i = index; i < index+hourSpan; i++ ) {
+            m_items[i]->setSpanStatus(false, -1);
+        }
     }
 }

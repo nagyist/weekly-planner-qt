@@ -10,15 +10,22 @@ Rectangle {
     property color backgroundColorFocus: "#DDDDDD"
     property color borderColor: "white"
 
-    width: parent.width
-    height: hourSpan * container.itemHeight
+    width: spanned ? 0 : parent.width
+    height: spanned ? 0 : hourSpan * container.itemHeight
     border.color: container.borderColor
-    border.width: 2
+    border.width: spanned ? 0 : 2
     color: container.backgroundColor
     z: 0
 
     // For notifying whenever the Cell's item data has changed.
     signal textEdited(int index, string newText)
+    // Cell merging and splitting notifications.
+    signal mergeDown(int index);
+    signal mergeUp(int index);
+    signal split(int index);
+
+    // Visible only, if not under hour spanning
+    visible: spanned ? false : true
 
 //    Component.onCompleted: {
 //        console.log("Cell " + itemData + " created on QML side!")
@@ -102,8 +109,8 @@ Rectangle {
             verticalCenter: parent.verticalCenter
         }
 
-        onMergeDown: console.log("Cell, onMergeDown");
-        onMergeUp: console.log("Cell, onMergeUp");
-        onSplit: console.log("Cell, onSplit");
+        onMergeDown: container.mergeDown(hourId);
+        onMergeUp: container.mergeUp(hourId);
+        onSplit: container.split(hourId);
     }
 }

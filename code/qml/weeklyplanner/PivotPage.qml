@@ -49,6 +49,18 @@ Item {
                             itemData + " new text: " + newText);
                 container.model.setItemData(index, newText);
             }
+            onMergeUp: {
+                console.log("Merge up clicked. Index: " + index);
+                container.model.mergeUp(index);
+            }
+            onMergeDown: {
+                console.log("Merge down clicked. Index: " + index);
+                container.model.mergeDown(index);
+            }
+            onSplit: {
+                console.log("Split clicked. Index: " + index);
+                container.model.split(index)
+            }
         }
 
         onFlickEnded: {
