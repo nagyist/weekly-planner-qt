@@ -17,6 +17,9 @@ Rectangle {
     color: container.backgroundColor
     z: 0
 
+    // For notifying whenever the Cell's item data has changed.
+    signal textEdited(int index, string newText)
+
 //    Component.onCompleted: {
 //        console.log("Cell " + itemData + " created on QML side!")
 //    }
@@ -34,15 +37,14 @@ Rectangle {
         anchors.centerIn: parent
         width: parent.width
         height: parent.height
-        text: itemData + " for " + hourSpan + " hours"
+        text: itemData
         color: focus ? container.textColorFocus : container.textColor
         // Don't use automatic focus. Makes the swiping experience better.
         activeFocusOnPress: false
 
         onTextChanged: {
-            //console.log("Text changed, setting new text to model");
-            // TODO: CALL MODEL SETTEXT -FUNCTION!
-            //setItemData(cellEdit.text);
+            // Notify parent upon text change.
+            container.textEdited(index, cellEdit.text);
         }
 
         // When focus changes, change the z-order so that the selected item

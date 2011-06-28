@@ -25,6 +25,10 @@ public:
 public:
     explicit DayModel(const QString& name, QObject *parent = 0);
     virtual ~DayModel();
+
+    // Exposed to QML for changing the Cell text.
+    Q_INVOKABLE void setItemData(int index, QString itemData);
+
 public: // From QAbstractListModel
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;

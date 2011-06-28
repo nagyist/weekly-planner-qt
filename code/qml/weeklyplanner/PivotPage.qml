@@ -41,6 +41,14 @@ Item {
             backgroundColor: container.backgroundColor
             backgroundColorFocus: container.backgroundColorFocus
             borderColor: container.borderColor
+
+            onTextEdited: {
+                // Set the new text to the model (model will take care
+                // checking whether the text has changed or not)
+                console.log("Item: " + index + " old text: " +
+                            itemData + " new text: " + newText);
+                container.model.setItemData(index, newText);
+            }
         }
 
         onFlickEnded: {

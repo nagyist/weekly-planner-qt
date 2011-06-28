@@ -126,3 +126,10 @@ bool DayModel::setHourSpan(int index, int hourSpan)
 
     return retVal;
 }
+
+void DayModel::setItemData(int index, QString itemData)
+{
+    if (index >= 0 && index < m_items.count()) {
+        m_items[index]->setItemData(itemData);
+    }
+}
