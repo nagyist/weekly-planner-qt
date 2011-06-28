@@ -43,9 +43,11 @@ public: // From QAbstractListModel
     bool setData( const QModelIndex & index, const QVariant & value, int role = Qt::EditRole );
 public slots:
     bool setHourSpan(int index, int hourSpan);
+    void handleItemChange();
 
 private: // Methods
     void setSpanStatus(bool spanned, int index, int parentIndex);
+    QModelIndex indexFromItem(const Timeslot* item) const;
 
 private:
     QString m_dayName;

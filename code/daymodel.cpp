@@ -23,6 +23,7 @@ DayModel::DayModel(const QString& name, QObject *parent) :
     QString templateItem("Day %1 Item %2");
     for (int i = 0; i < SLOTS_IN_A_DAY; i++) {
         Timeslot* slot = new Timeslot(i, QTime(i,0,0,0));
+        connect(slot, SIGNAL(dataChanged()), this, SLOT(handleItemChange()));
         slot->setItemData(templateItem.arg(m_dayName).arg(i));
         m_items.append(slot);
         qDebug() << "Created slot" << slot->toString();
@@ -118,6 +119,25 @@ bool DayModel::setData( const QModelIndex & index, const QVariant & value, int r
     }
     //return QVariant("ERR: other");
     return false;
+}
+
+void DayModel::handleItemChange()
+{
+    Timeslot* item = static_cast<Timeslot*>(sender());
+    QModelIndex modelIndex = indexFromItem(item);
+    if(modelIndex.isValid()) {
+        qDebug() << "Now emitting dataChanged(index, index)!";
+        emit dataChanged(modelIndex, modelIndex);
+    }
+}
+
+QModelIndex DayModel::indexFromItem(const Timeslot* item) const
+{
+  Q_ASSERT(item);
+  for(int row=0; row<m_items.size(); ++row) {
+    if(m_items.at(row) == item) return index(row);
+  }
+  return QModelIndex();
 }
 
 bool DayModel::setHourSpan(int index, int hourSpan)
