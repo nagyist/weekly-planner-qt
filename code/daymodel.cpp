@@ -168,10 +168,15 @@ void DayModel::mergeDown(int index)
         qDebug() << "Cannot span downwards!";
     }
     else if (index >= 0 && index < m_items.count()-1) {
+        // Check that we're not spanning on already spanned hours!
         int oldHourSpan = m_items[index]->hourSpan();
-        m_items[index]->setHourSpan(oldHourSpan+1);
-        // Set the next item beneath the spanned item as newly spanned!
-        m_items[index+oldHourSpan]->setSpanStatus(true, index);
+        if (m_items[index+oldHourSpan]->hourSpan() > 1) {
+            qDebug() << "Cannot span on already spanned hours! Please split first!";
+        } else {
+            m_items[index]->setHourSpan(oldHourSpan+1);
+            // Set the next item beneath the spanned item as newly spanned!
+            m_items[index+oldHourSpan]->setSpanStatus(true, index);
+        }
     } else {
         qDebug() << "Something went severely wrong!";
     }
@@ -199,6 +204,9 @@ void DayModel::mergeUp(int index)
             // The item hasn't been spanned before, the given index is valid.
             int oldHourSpan = m_items[index]->hourSpan();
             m_items[index-1]->setHourSpan(oldHourSpan+1);
+            // Reset the span hour count for the current item and set it to
+            // be spanned.
+            m_items[index]->setHourSpan(1);
             m_items[index]->setSpanStatus(true, index);
         }
 

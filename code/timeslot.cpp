@@ -35,7 +35,7 @@ bool Timeslot::setItemData(const QString& data)
 bool Timeslot::setHourSpan(int hours)
 {
     if (hours != m_hours) {
-        qDebug() << "Timeslot::setHourSpan():" << hours;
+        qDebug() << "Timeslot::setHourSpan():" << hours << "(on item" << m_hourId << ")";
         m_hours = hours;
         emit dataChanged();
         return true;
@@ -55,7 +55,7 @@ QString Timeslot::itemData() const
 
 int Timeslot::hourSpan() const
 {
-    qDebug() << "Timeslot::hourSpan():" << m_hours;
+    qDebug() << "Timeslot::hourSpan():" << m_hours << "(item" << m_hourId <<")";
     return m_hours;
 }
 
@@ -66,12 +66,15 @@ QString Timeslot::toString() const
 
 bool Timeslot::setSpanStatus(bool spanned, int parentIndex)
 {
+    qDebug() << "setSpanStatus:" << spanned << "on Item:" << m_hourId
+             << "with parentIndex:" << parentIndex;
     m_spanned = spanned;
     if (m_spanned) {
         m_parentIndex = parentIndex;
     } else {
         m_parentIndex = -1;
     }
+    emit dataChanged();
 }
 
 bool Timeslot::spanned() const
