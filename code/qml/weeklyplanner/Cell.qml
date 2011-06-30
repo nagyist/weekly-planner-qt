@@ -1,6 +1,6 @@
 import QtQuick 1.0
 
-Rectangle {
+Item {
     id: container
 
     property int itemHeight: 50
@@ -12,9 +12,6 @@ Rectangle {
 
     width: spanned ? 0 : parent.width
     height: spanned ? 0 : hourSpan * container.itemHeight
-    border.color: container.borderColor
-    border.width: spanned ? 0 : 2
-    color: container.backgroundColor
     z: 0
 
     // For notifying whenever the Cell's item data has changed.
@@ -33,9 +30,16 @@ Rectangle {
 
     // Background image
     Image {
+        id: bgImg
+        anchors.fill: parent
+        source: "gfx/cell_background.png"
+        visible: cellEdit.focus ? false : true
+    }
+
+    Image {
         anchors.fill: parent
         source: "gfx/text_field.png"
-        visible: cellEdit.focus ? true : false
+        visible: !bgImg.visible
     }
 
     TextEdit {

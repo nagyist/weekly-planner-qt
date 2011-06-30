@@ -50,7 +50,7 @@ Item {
     Component {
         id: hourDelegate
 
-        Rectangle {
+        Item {
             id: hourRect
 
 //            Component.onCompleted: {
@@ -59,9 +59,12 @@ Item {
 
             width: container.width
             height: container.itemHeight
-            border.color: container.borderColor
-            border.width: 2
-            color: container.backgroundColor
+
+            // Background image
+            Image {
+                anchors.fill: parent
+                source: "gfx/hour_background.png"
+            }
 
             Text {
                 color: container.textColor
