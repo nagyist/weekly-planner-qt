@@ -1,14 +1,13 @@
 import QtQuick 1.0
 
-Rectangle {
+Item {
     id: container
 
     signal clicked
     signal copy()
     signal paste()
 
-    property color backgroundColor: "#3B3B3B"
-    property color borderColor: "white"
+    property string backgroundImage: "gfx/copy_paste_background.png"
     property int borderWidth: 2
     property int iconSpacing: 5
 
@@ -17,14 +16,14 @@ Rectangle {
 
     width: 102
     height: 56
-    color: backgroundColor
     // Hidden by default
     opacity: 0
-    border {
-        width: container.borderWidth
-        color: container.borderColor
-    }
 
+    // Background image
+    Image {
+        anchors.fill: parent
+        source: container.backgroundImage
+    }
     // Buttons for copying and pasting the cell content
     Button {
         id: copyButton
