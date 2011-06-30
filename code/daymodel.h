@@ -7,7 +7,8 @@
 
 #include "timeslot.h"
 
-static const int SLOTS_IN_A_DAY = 24;
+static const int DAYS_FIRST_SLOT = 8;
+static const int SLOTS_IN_A_DAY = 19;
 
 class DayModel : public QAbstractListModel
 {

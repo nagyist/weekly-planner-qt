@@ -21,8 +21,8 @@ DayModel::DayModel(const QString& name, QObject *parent) :
     QAbstractListModel(parent), m_dayName(name), m_items()
 {
     QString templateItem("Day %1 Item %2");
-    for (int i = 0; i < SLOTS_IN_A_DAY; i++) {
-        Timeslot* slot = new Timeslot(i, QTime(i,0,0,0));
+    for (int i = DAYS_FIRST_SLOT; i < SLOTS_IN_A_DAY; i++) {
+        Timeslot* slot = new Timeslot(i-DAYS_FIRST_SLOT, QTime(i,0,0,0));
         connect(slot, SIGNAL(dataChanged()), this, SLOT(handleItemChange()));
         slot->setItemData(templateItem.arg(m_dayName).arg(i));
         m_items.append(slot);
