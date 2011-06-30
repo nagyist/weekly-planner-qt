@@ -12,10 +12,8 @@ Item {
     // and landscape modes.
     property int headerItemWidth: 182
     // Defines whether or not to show borders & and the color of it.
-    property bool borders: true
-    property color borderColor: "white"
+    property string backgroundImagePath: "gfx/header_background.png"
     // Colors, text sizes etc.
-    property color backgroundColor: "gray"
     property int headerTextSize: 36
     property color headerTextColor: "white"
     // Defines, whether the pathview can be flicked or only clicked.
@@ -29,13 +27,10 @@ Item {
     Component {
         id: pivotHeaderDelegate
 
-        Rectangle {
+        Item {
             height: parent.height
             width: container.headerItemWidth
-            border.width: borders ? 2 : 0
-            border.color: borders ? container.borderColor : "#00000000"
 
-            color: container.backgroundColor
             Text {
                 color: container.headerTextColor
                 anchors.centerIn: parent
@@ -72,6 +67,12 @@ Item {
         currentIndex: container.currentIndex
         onCurrentIndexChanged: {
             container.indexChanged(pathView.currentIndex)
+        }
+
+        // Background image
+        Image {
+            anchors.fill: parent
+            source: container.backgroundImagePath
         }
 
         path: Path {

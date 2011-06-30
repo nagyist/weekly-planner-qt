@@ -7,11 +7,11 @@ Item {
 
     property int itemHeight: 80
     property color textColor: "white"
-    property color textColorFocus: "black"
-    property color backgroundColor: "#666666"
-    property color backgroundColorFocus: "#DDDDDD"
-    property color borderColor: "white"
+    property color textColorFocus : "white"
     property variant model: null
+    // These 2 properties are being forwarded to the Cell delegate.
+    property string cellBackgroundImagePath: "gfx/cell_background.png"
+    property string cellEditFocusImagePath: "gfx/text_field.png"
 
     signal contentYChanged(int y)
     property alias contentY: weekDay.contentY
@@ -37,16 +37,15 @@ Item {
         delegate: Cell {
             itemHeight: container.itemHeight
             textColor: container.textColor
-            textColorFocus: container.textColorFocus
-            backgroundColor: container.backgroundColor
-            backgroundColorFocus: container.backgroundColorFocus
-            borderColor: container.borderColor
+            textColorFocus : container.textColorFocus
+            cellBackgroundImagePath: container.cellBackgroundImagePath
+            cellEditFocusImagePath: container.cellEditFocusImagePath
 
             onTextEdited: {
-                // Set the new text to the model (model will take care
-                // checking whether the text has changed or not)
 //                console.log("Item: " + index + " old text: " +
 //                            itemData + " new text: " + newText);
+                // Set the new text to the model (model will take care
+                // checking whether the text has changed or not)
                 container.model.setItemData(index, newText);
             }
             onMergeUp: {

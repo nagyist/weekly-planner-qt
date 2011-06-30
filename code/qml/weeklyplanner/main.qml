@@ -6,11 +6,13 @@ Item {
     width: 360
     height: 640
 
+    // Uses the Pivot component for showing/navigating through content.
     Pivot {
         id: mainPivot
         anchors.fill: parent
     }
 
+    // Button for exiting the application.
     Button {
         anchors {
             top: parent.top

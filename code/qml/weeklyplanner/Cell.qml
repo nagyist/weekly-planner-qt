@@ -4,14 +4,18 @@ Item {
     id: container
 
     property int itemHeight: 50
+    // Define color of the text
     property color textColor: "white"
-    property color textColorFocus: "black"
-    property color backgroundColor: "#666666"
-    property color backgroundColorFocus: "#DDDDDD"
-    property color borderColor: "white"
+    property color textColorFocus : "white"
+    // Background images for the Cell when focused & non-focused
+    property string cellBackgroundImagePath: "gfx/cell_background.png"
+    property string cellEditFocusImagePath: "gfx/text_field.png"
 
+    // Internal properties, don't touch from outside!
     width: spanned ? 0 : parent.width
     height: spanned ? 0 : hourSpan * container.itemHeight
+    // Visible only, if not under hour spanning
+    visible: spanned ? false : true
     z: 0
 
     // For notifying whenever the Cell's item data has changed.
@@ -21,24 +25,22 @@ Item {
     signal mergeUp(int index);
     signal split(int index);
 
-    // Visible only, if not under hour spanning
-    visible: spanned ? false : true
-
 //    Component.onCompleted: {
 //        console.log("Cell " + itemData + " created on QML side!")
 //    }
 
-    // Background image
+    // Background image.
     Image {
         id: bgImg
         anchors.fill: parent
-        source: "gfx/cell_background.png"
+        source: container.cellBackgroundImagePath
         visible: cellEdit.focus ? false : true
     }
 
+    // Background image when editing the Cell.
     Image {
         anchors.fill: parent
-        source: "gfx/text_field.png"
+        source: container.cellEditFocusImagePath
         visible: !bgImg.visible
     }
 

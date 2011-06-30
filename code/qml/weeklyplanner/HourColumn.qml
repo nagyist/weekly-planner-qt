@@ -6,9 +6,9 @@ Item {
     // Defines the column height. Should be set from outside.
     property int itemHeight: 80
     // Settable colors.
-    property color backgroundColor: "gray"
-    property color borderColor: "white"
     property color textColor: "white"
+    // Background image for the single hour cell
+    property string backgroundImagePath: "gfx/hour_background.png"
     // Defined in order to scorll the hour column with content pane.
     property alias contentY: hourColumn.contentY
 
@@ -52,7 +52,6 @@ Item {
 
         Item {
             id: hourRect
-
 //            Component.onCompleted: {
 //                console.log("HourItem " + startTime + " created on QML side!")
 //            }
@@ -60,12 +59,13 @@ Item {
             width: container.width
             height: container.itemHeight
 
-            // Background image
+            // Background image for the hour item.
             Image {
                 anchors.fill: parent
-                source: "gfx/hour_background.png"
+                source: container.backgroundImagePath
             }
 
+            // Time text.
             Text {
                 color: container.textColor
                 anchors.centerIn: parent
@@ -78,7 +78,7 @@ Item {
     ListModel {
         id: hourModel
 
-        ListElement {
+/*        ListElement {
             startTime: "00:00"
         }
         ListElement {
@@ -101,7 +101,7 @@ Item {
         }
         ListElement {
             startTime: "07:00"
-        }
+        }*/
         ListElement {
             startTime: "08:00"
         }
@@ -135,7 +135,7 @@ Item {
         ListElement {
             startTime: "18:00"
         }
-        ListElement {
+/*        ListElement {
             startTime: "19:00"
         }
         ListElement {
@@ -149,6 +149,6 @@ Item {
         }
         ListElement {
             startTime: "23:00"
-        }
+        }*/
     }
 }

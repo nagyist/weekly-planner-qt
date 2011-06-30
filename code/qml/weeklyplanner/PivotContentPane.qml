@@ -3,14 +3,23 @@ import QtQuick 1.0
 Item {
     id: container
 
+    // The model has to be QAbstractListModel compatible!
     property alias model: contentPane.model
-    property alias currentIndex: contentPane.currentIndex
-    property int pageHeight: 640
-    property int contentY: 0
-    property bool landscape: false
 
-    signal indexChanged(int index)
+    property int pageHeight: 640
+    property bool landscape: false
+    // Background images for single cells (active & non-avtive).
+    property string cellBackgroundImagePath: "gfx/cell_background.png"
+    property string cellEditFocusImagePath: "gfx/text_field.png"
+    // Text color properties.
+    property color textColor: "white"
+    property color textColorFocus : "white"
+
+    property alias currentIndex: contentPane.currentIndex
+    property int contentY: 0
+
     signal contentYChanged(int y)
+    signal indexChanged(int index)
 
     ListView {
         id: contentPane
@@ -45,6 +54,10 @@ Item {
             width: contentPane.width
             height: container.pageHeight
             model: container.model.day(index).items()
+            cellBackgroundImagePath: container.cellBackgroundImagePath
+            cellEditFocusImagePath: container.cellEditFocusImagePath
+            textColor: container.textColor
+            textColorFocus : container.textColorFocus
 
             // TODO: THIS CAUSES BINDING LOOP!
 //            contentY: container.contentY

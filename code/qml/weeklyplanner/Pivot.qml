@@ -5,24 +5,29 @@ Rectangle {
 
     width: 640
     height: 360
-    color: "lightgray"
+    color: "black"
 
     // Model HAS TO BE set in order for the Pivot to work!
+    // The model also has to be compatible with QAbstarctListModel.
     property variant model: week
     // How high the header is. Can be differentiated between portrait
     // and landscape modes.
     property int headerHeight: 70
+    // Defines the width of one header item.
     property int headerItemWidth: landscape ? 214 : 182
-    // Colors, colors, colors.
-    property color backgroundColor: "gray"
-    property color backgroundColorFocus: "lightGray"
-    property color borderColor: "white"
+    // Color definitions. Modify in order to change the text colors.
     property color textColor: "white"
-    property color textColorFocus: "red"
-    property color headerTextColor: "white"
+    property color textColorFocus: "white"
+    property color headerTextColor: "lightgray"
+    // Define the UI graphics.
+    property string headerBgImage: "gfx/header_background.png"
+    property string hourColumnBgImage: "gfx/hour_background.png"
+    property string cellBackgroundImagePath: "gfx/cell_background.png"
+    property string cellEditFocusImagePath: "gfx/text_field.png"
 
-    // Internal properties, don't set from outside.
-    property bool landscape: container.width > container.height
+    // Internal properties, don't set from outside. This is used to
+    // determine in which orientation the screen is.
+    property bool landscape: width > height
 
     // Pivot headers, used for navigation.
     PivotHeader {
@@ -30,10 +35,12 @@ Rectangle {
 
         model: parent.model
         height: parent.headerHeight
+        width: parent.width
         headerItemWidth: parent.headerItemWidth
+        // Set the background image
+        backgroundImagePath: parent.headerBgImage
+        headerTextColor: parent.headerTextColor
         landscape: parent.landscape
-        // Don't show borders on the header items
-        borders: false
         // If the header should work both ways and by flicking,
         // set this property to true.
         flickable: true
@@ -70,9 +77,9 @@ Rectangle {
             rightMargin: 1
         }
 
-        textColor: container.textColor
-        backgroundColor: container.backgroundColor
-        borderColor: container.borderColor
+        // Define the colors & background images used
+        textColor: parent.textColor
+        backgroundImagePath: parent.hourColumnBgImage
 
         onContentYChanged: {
             // Bind the contentPane to move with the hourColumn
@@ -85,15 +92,21 @@ Rectangle {
         id: contentPane
 
         model: parent.model
-        pageHeight: container.height - container.headerHeight
+        pageHeight: parent.height - parent.headerHeight
         landscape: parent.landscape
+        // Set the background graphics & text colors etc.
+        cellBackgroundImagePath: parent.cellBackgroundImagePath
+        cellEditFocusImagePath: parent.cellEditFocusImagePath
+        textColor: parent.textColor
+        textColorFocus: parent.textColorFocus
+
         anchors {
             top: headerRow.bottom
             bottom: parent.bottom
             left: hourColumn.right
             right: parent.right
             topMargin: 2
-            leftMargin: 1
+            leftMargin: 0
             rightMargin: 2
         }
 
