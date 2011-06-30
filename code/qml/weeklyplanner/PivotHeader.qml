@@ -11,18 +11,20 @@ Item {
     // How wide the header is. Should be differentiated between portrait
     // and landscape modes.
     property int headerItemWidth: 182
-    property int currentIndex: 0
     // Defines whether or not to show borders & and the color of it.
     property bool borders: true
     property color borderColor: "white"
-    // Colors.
+    // Colors, text sizes etc.
     property color backgroundColor: "gray"
+    property int headerTextSize: 36
     property color headerTextColor: "white"
     // Defines, whether the pathview can be flicked or only clicked.
     property bool flickable: true
     property bool landscape: false
 
+    // Internal properties etc. do not use from outside!
     signal indexChanged(int index)
+    property int currentIndex: 0
 
     Component {
         id: pivotHeaderDelegate
@@ -40,7 +42,7 @@ Item {
                 opacity: PathView.transparency
                 text: dayName
                 font {
-                    pixelSize: 32
+                    pixelSize: container.headerTextSize
                 }
             }
 
