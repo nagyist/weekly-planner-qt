@@ -189,16 +189,10 @@ void DayModel::mergeUp(int index)
         qDebug() << "Cannot span upwards!";
     } else if (index > 0 && index < m_items.count()) {
         // Get the previous item, as the hourSpan must be set to it.
-        int parentIndex = m_items[index]->parentIndex();
+        int parentIndex = m_items[index-1]->parentIndex();
         qDebug() << "parentIndex:" << parentIndex;
         if (parentIndex != -1) {
-            qDebug() << "parentIndex != -1 -branch!" << parentIndex;
-            // The item was already spanned, use the given parent index as
-            // starting point for the hourSpan.
-            int oldHourSpan = m_items[parentIndex]->hourSpan();
-            m_items[parentIndex]->setHourSpan(oldHourSpan+1);
-            // Set the currently selected item's spanStatus as true.
-            m_items[index]->setSpanStatus(true, parentIndex);
+            qDebug() << "Cannot span on already spanned hours! Please split first!";
         } else {
             qDebug() << "parentIndex == -1!" << parentIndex;
             // The item hasn't been spanned before, the given index is valid.

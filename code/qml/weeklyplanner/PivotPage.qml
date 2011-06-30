@@ -45,8 +45,8 @@ Item {
             onTextEdited: {
                 // Set the new text to the model (model will take care
                 // checking whether the text has changed or not)
-                console.log("Item: " + index + " old text: " +
-                            itemData + " new text: " + newText);
+//                console.log("Item: " + index + " old text: " +
+//                            itemData + " new text: " + newText);
                 container.model.setItemData(index, newText);
             }
             onMergeUp: {
