@@ -19,8 +19,12 @@ Item {
             right: parent.right
             margins: 5
         }
-        width: 54
-        height: 54
+        width: 48
+        height: 48
+
+        bgImage: "gfx/exit_button.png";
+        bgImagePressed: "gfx/exit_button_pressed.png";
+
         onClicked: Qt.quit();
     }
 }
