@@ -16,6 +16,10 @@ Item {
     signal contentYChanged(int y)
     property alias contentY: weekDay.contentY
 
+    // Current index from the HourColumn. This will be used to position the
+    // weekDay list component correctly, when it has fully loaded.
+    property int hourIndex: 0
+
     width: 360
     height: 640
 
@@ -23,8 +27,13 @@ Item {
         id: weekDay
 
         Component.onCompleted: {
-            console.log("weekDay w*h: (" + weekDay.width + "x" + weekDay.height +
-                        ") \ncontent w*h: (" + weekDay.contentWidth + "x" + weekDay.contentHeight + ")");
+            console.log("weekDay w*h: (" + weekDay.width +
+                        "x" + weekDay.height +
+                        ") \ncontent w*h: (" + weekDay.contentWidth +
+                        "x" + weekDay.contentHeight + ")");
+
+            // When the component is loaded, set the list to correct position.
+            positionViewAtIndex(container.hourIndex, ListView.Beginning);
         }
 
         anchors.fill: parent

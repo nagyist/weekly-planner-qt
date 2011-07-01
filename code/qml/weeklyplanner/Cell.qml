@@ -47,6 +47,7 @@ Item {
     TextEdit {
         id: cellEdit
 
+
         anchors.centerIn: parent
         width: parent.width
         height: parent.height
@@ -55,9 +56,21 @@ Item {
         // Don't use automatic focus. Makes the swiping experience better.
         activeFocusOnPress: false
 
+        // This if for optimizing the performance by avoiding unnecessary
+        // function calls to the model.
+        property bool ready: false
+        Component.onCompleted: {
+            cellEdit.ready = true;
+        }
+
         onTextChanged: {
-            // Notify parent upon text change.
-            container.textEdited(index, cellEdit.text);
+            // Notify parent upon text change. Optimized a bit by preventing
+            // calls to the model while the component is still in loading status.
+            if (!cellEdit.ready) {
+                //console.log("Still loading!");
+            } else {
+                container.textEdited(index, cellEdit.text);
+            }
         }
 
         // When focus changes, change the z-order so that the selected item

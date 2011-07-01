@@ -54,8 +54,6 @@ Rectangle {
         onIndexChanged: {
             console.log("PivotHeader index changed: " + index);
             contentPane.currentIndex = index;
-            // Change the correct day also to the HourColumn
-            hourColumn.refresh();
         }
     }
 
@@ -99,6 +97,9 @@ Rectangle {
         cellEditFocusImagePath: parent.cellEditFocusImagePath
         textColor: parent.textColor
         textColorFocus: parent.textColorFocus
+        // Bind this with hourColumn's current index. This way the content
+        // listing will position itself correctly when page is switched.
+        hourIndex: hourColumn.hourIndex
 
         anchors {
             top: headerRow.bottom
@@ -112,8 +113,6 @@ Rectangle {
 
         onIndexChanged: {
             headerRow.currentIndex = index;
-            // Change the correct day also to the HourColumn
-            hourColumn.refresh();
         }
 
         // Bind the hourcolumn to move with the PivotPage

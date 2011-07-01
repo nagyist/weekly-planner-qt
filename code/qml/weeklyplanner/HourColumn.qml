@@ -11,14 +11,10 @@ Item {
     property string backgroundImagePath: "gfx/hour_background.png"
     // Defined in order to scorll the hour column with content pane.
     property alias contentY: hourColumn.contentY
+    property alias hourIndex: hourColumn.currentIndex
 
     // Signalled, when hour column's y-coordinate changes.
     signal contentYChanged()
-    // Called when the page switches. Resets the hour column back to 00:00.
-    function refresh() {
-        console.log("Refreshed");
-        hourColumn.positionViewAtIndex(0, ListView.Beginning);
-    }
 
     // Hours are being shown in a vertical list
     ListView {
@@ -32,6 +28,7 @@ Item {
         snapMode: ListView.SnapToItem
         clip: true
         interactive: false
+        highlightRangeMode: ListView.StrictlyEnforceRange
         // Cache the whole hourcolumn into memory.
         cacheBuffer: 1920
 

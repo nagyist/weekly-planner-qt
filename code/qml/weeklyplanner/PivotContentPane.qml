@@ -17,6 +17,8 @@ Item {
 
     property alias currentIndex: contentPane.currentIndex
     property int contentY: 0
+    // For binding with the hourColumn's current index.
+    property int hourIndex: 0
 
     signal contentYChanged(int y)
     signal indexChanged(int index)
@@ -44,7 +46,9 @@ Item {
 //        cacheBuffer: width * 3 // Caches 3 days
 
         delegate: pageDelegate
-        onCurrentIndexChanged: container.indexChanged(currentIndex);
+        onCurrentIndexChanged: {
+            container.indexChanged(currentIndex);
+        }
     }
 
     Component {
@@ -58,6 +62,7 @@ Item {
             cellEditFocusImagePath: container.cellEditFocusImagePath
             textColor: container.textColor
             textColorFocus : container.textColorFocus
+            hourIndex: container.hourIndex
 
             // TODO: THIS CAUSES BINDING LOOP!
 //            contentY: container.contentY
