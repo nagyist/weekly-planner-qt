@@ -78,12 +78,12 @@ Item {
         onFocusChanged: {
             if (focus == false) {
                 container.z = 0;
-                console.log("Deactivating focus from item " + itemData + " on index: " + index
-                            + " focus: " + focus + " z:" + z)
+//                console.log("Deactivating focus from item " + itemData + " on index: " + index
+//                            + " focus: " + focus + " z:" + z)
             } else {
                 container.z = 100;
-                console.log("Activating focus from item " + itemData + " on index: " + index
-                            + " focus: " + focus + " z:" + z)
+//                console.log("Activating focus from item " + itemData + " on index: " + index
+//                            + " focus: " + focus + " z:" + z)
             }
         }
 

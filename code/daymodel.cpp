@@ -26,7 +26,7 @@ DayModel::DayModel(const QString& name, QObject *parent) :
         connect(slot, SIGNAL(dataChanged()), this, SLOT(handleItemChange()));
         slot->setItemData(templateItem.arg(m_dayName).arg(i));
         m_items.append(slot);
-        qDebug() << "Created slot" << slot->toString();
+//        qDebug() << "Created slot" << slot->toString();
     }
     setRoleNames(DayModel::roleNames());
 
@@ -126,7 +126,7 @@ void DayModel::handleItemChange()
     Timeslot* item = static_cast<Timeslot*>(sender());
     QModelIndex modelIndex = indexFromItem(item);
     if(modelIndex.isValid()) {
-        qDebug() << "Now emitting dataChanged(index, index)!";
+//        qDebug() << "Now emitting dataChanged(index, index)!";
         emit dataChanged(modelIndex, modelIndex);
     }
 }
@@ -194,7 +194,6 @@ void DayModel::mergeUp(int index)
         if (parentIndex != -1) {
             qDebug() << "Cannot span on already spanned hours! Please split first!";
         } else {
-            qDebug() << "parentIndex == -1!" << parentIndex;
             // The item hasn't been spanned before, the given index is valid.
             int oldHourSpan = m_items[index]->hourSpan();
             m_items[index-1]->setHourSpan(oldHourSpan+1);

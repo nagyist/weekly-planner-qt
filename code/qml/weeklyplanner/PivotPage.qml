@@ -29,7 +29,7 @@ Item {
         Component.onCompleted: {
             console.log("weekDay w*h: (" + weekDay.width +
                         "x" + weekDay.height +
-                        ") \ncontent w*h: (" + weekDay.contentWidth +
+                        ") content w*h: (" + weekDay.contentWidth +
                         "x" + weekDay.contentHeight + ")");
 
             // When the component is loaded, set the list to correct position.
@@ -77,7 +77,6 @@ Item {
 
         onCurrentIndexChanged: {
             container.indexChanged(currentIndex);
-            console.log("IDX: " + currentIndex);
         }
 
         // Notify the changed value.

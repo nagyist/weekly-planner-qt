@@ -41,7 +41,7 @@ QVariant WeekModel::data(const QModelIndex &index, int role) const
 {
     if (index.isValid()) {
         int row = index.row();
-        qDebug() << "Requested day for column" << row;
+//        qDebug() << "Requested day for column" << row;
         if (row >= 0 && row < m_days.count()) {
             Day* day = m_days[row];
             if (role == DayNameRole){

@@ -25,7 +25,7 @@ bool Timeslot::setItemData(const QString& data)
 {
     if (data != m_data) {
         m_data = data;
-        qDebug() << "Item data changed to: " << data;
+//        qDebug() << "Item data changed to: " << data;
         emit dataChanged();
         return true;
     }
@@ -55,7 +55,7 @@ QString Timeslot::itemData() const
 
 int Timeslot::hourSpan() const
 {
-    qDebug() << "Timeslot::hourSpan():" << m_hours << "(item" << m_hourId <<")";
+//    qDebug() << "Timeslot::hourSpan():" << m_hours << "(item" << m_hourId <<")";
     return m_hours;
 }
 
