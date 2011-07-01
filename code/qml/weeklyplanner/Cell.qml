@@ -129,7 +129,11 @@ Item {
         }
 
         onMergeDown: container.mergeDown(hourId);
-        onMergeUp: container.mergeUp(hourId);
+        onMergeUp: {
+            // "Fix" for UI getting trashed issue on split
+            cellEdit.focus = false;
+            container.mergeUp(hourId);
+        }
         onSplit: container.split(hourId);
     }
 }
