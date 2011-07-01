@@ -43,6 +43,7 @@ Item {
         preferredHighlightBegin: 0
         preferredHighlightEnd: contentPane.width
         highlightRangeMode: ListView.StrictlyEnforceRange
+        keyNavigationWraps: true
 //        cacheBuffer: width * 3 // Caches 3 days
 
         delegate: pageDelegate

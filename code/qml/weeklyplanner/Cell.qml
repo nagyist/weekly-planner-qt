@@ -30,11 +30,13 @@ Item {
 //    }
 
     // Background image.
-    Image {
+    BorderImage {
         id: bgImg
         anchors.fill: parent
         source: container.cellBackgroundImagePath
         visible: cellEdit.focus ? false : true
+        border.left: 2; border.top: 2
+        border.right: 2; border.bottom: 2
     }
 
     // Background image when editing the Cell.
