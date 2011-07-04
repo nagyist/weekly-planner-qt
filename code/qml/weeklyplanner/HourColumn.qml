@@ -75,7 +75,7 @@ Item {
     ListModel {
         id: hourModel
 
-        ListElement {
+/*        ListElement {
             startTime: "00:00"
         }
         ListElement {
@@ -93,6 +93,7 @@ Item {
         ListElement {
             startTime: "05:00"
         }
+*/
         ListElement {
             startTime: "06:00"
         }
@@ -135,7 +136,7 @@ Item {
         ListElement {
             startTime: "19:00"
         }
-        ListElement {
+/*        ListElement {
             startTime: "20:00"
         }
         ListElement {
@@ -147,5 +148,6 @@ Item {
         ListElement {
             startTime: "23:00"
         }
+*/
     }
 }
