@@ -10,3 +10,5 @@ This application features pivotal navigation, using a custom-made Pivot UI compo
 You can find the Qt Quick Components project page from the Qt Quick Components wiki page. The whole Qt Quick Components list (for Symbian), including all of the components used in the Weekly Planner example app, can be found on the "All Qt Quick Components" page.
 
 The application has been developed in parallel with a​corresponding Windows Phone version.
+
+<img src="https://raw.github.com/nokia-developer/weekly-planner-qt/master/doc/weeklyplanner_mainview.png" width="300px" /> <img src="https://raw.github.com/nokia-developer/weekly-planner-qt/master/doc/weeklyplanner_editview.png" width="300px" /> <img src="https://raw.github.com/nokia-developer/weekly-planner-qt/master/doc/weeklyplanner_detailsview.png" width="300px" />
