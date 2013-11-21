@@ -11,4 +11,4 @@ You can find the Qt Quick Components project page from the Qt Quick Components w
 
 The application has been developed in parallel with a​corresponding Windows Phone version.
 
-<img src="https://raw.github.com/nokia-developer/weekly-planner-qt/master/doc/weeklyplanner_mainview.png" width="300px" /> <img src="https://raw.github.com/nokia-developer/weekly-planner-qt/master/doc/weeklyplanner_editview.png" width="300px" /> <img src="https://raw.github.com/nokia-developer/weekly-planner-qt/master/doc/weeklyplanner_detailsview.png" width="300px" />
+<img src="https://raw.github.com/nokia-developer/weekly-planner-qt/master/doc/weeklyplanner_mainview.png" width="150px" /> <img src="https://raw.github.com/nokia-developer/weekly-planner-qt/master/doc/weeklyplanner_editview.png" width="150px" /> <img src="https://raw.github.com/nokia-developer/weekly-planner-qt/master/doc/weeklyplanner_detailsview.png" width="150px" />
